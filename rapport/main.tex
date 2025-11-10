@@ -1,0 +1,68 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{preamble}
+
+
+\PassOptionsToPackage{
+  backend=biber,
+  style=numeric, % eller authoryear
+  sorting=nyt,
+  giveninits=true,
+  maxbibnames=99,
+  doi=false,isbn=false,url=true,
+  dashed=false
+}{biblatex}
+
+
+\usepackage{preamble}
+\usepackage{xcolor}
+\usepackage{booktabs}
+\usepackage{circuitikz}
+\usepackage{float} % for [H] exact figure placement
+\usetikzlibrary{arrows.meta}
+
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+
+
+
+\addbibresource{./referanser.bib}
+
+% ------ Metadata ------
+\newcommand{\institution}{FHS/Cyberingeniørskolen}
+\newcommand{\laboratory}{Elektronikklaboratoriet}
+\newcommand{\coursecode}{ING2508 \; Kretsteknikk}
+\newcommand{\assignmentno}{H02}
+\newcommand{\assignmenttype}{LABORATORIERAPPORT}
+\newcommand{\assignmenttitle}{MASKE- OG NODE-ANALYSE OG WHEATSTONE MÅLEBRU}
+\newcommand{\studentname}{Tor Johan Aleksandersen}
+\newcommand{\partnername}{Morten Cleveland}
+\newcommand{\class}{VING 78}
+\newcommand{\labdate}{14. november 2025}
+\newcommand{\submissiondate}{\today}
+
+\begin{document}
+
+\input{frontpage}
+
+\pagenumbering{Roman}
+\setcounter{page}{1}
+
+\tableofcontents
+\clearpage
+
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+\input{sections/instrumenter}
+\clearpage
+
+\input{sections/teori}
+\clearpage
+
+\input{sections/resultater}
+\clearpage
+
+\printbibliography[heading=bibintoc,title={Referanser}]
+\clearpage
+
+\end{document}

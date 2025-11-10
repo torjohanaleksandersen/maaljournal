@@ -1,1 +1,322 @@
 \section{Teori}
+
+\subsection{Beregninger}
+\begin{figure}[H]\label{fig:Krets}
+\centering
+\begin{circuitikz}[american voltages]
+
+    %--- Noder (svarte prikker) ---------------------------------
+    % Bunn/venstre (til jord)
+    \node[circle, fill=black, inner sep=1.2pt] (G)  at (0,0)  {};
+    \node[circle, fill=black, inner sep=1.2pt] (T1) at (0,5)  {}; % etter batteri oppe
+
+    % Øvre gren
+    \node[circle, fill=black, inner sep=1.2pt] (A)  at (4,5)  {};
+    \node[circle, fill=black, inner sep=1.2pt] (B)  at (6,5)  {};
+    \node[circle, fill=black, inner sep=1.2pt] (T2) at (10,5) {};
+
+    % Nedre gren
+    \node[circle, fill=black, inner sep=1.2pt] (BR) at (10,0) {};
+    \node[circle, fill=black, inner sep=1.2pt] (F)  at (5,0)  {};
+    \node[circle, fill=black, inner sep=1.2pt] (E)  at (5,2)  {};
+
+    \node[circle, fill=black, inner sep=1.2pt] (D)  at (5,4)  {};
+
+    %--- Labels på nodene ----------------------------------------
+    \node[above] at (A) {$A$};
+    \node[above] at (B) {$B$};
+    \node[above right] at (E) {$E$};
+    \node[below] at (F) {$F$};
+    \node[right] at (D) {$D$};
+
+    %--- Jord ----------------------------------------------------
+    \draw (G) node[ground] {};
+
+    %--- Batteri B1 ----------------------------------------------
+    \draw (T1) to[battery1, l_=$B_1$, a^=$10\,\text{V}$] (G);
+
+    %--- R1 fra batteri til A ------------------------------------
+    \draw (T1) to[R, l_=$R_1$, a^=$12\,\text{k}\Omega$] (A);
+
+    %--- Åpen bryter mellom A og B -------------------------------
+    % "switch" gir en mekanisk brytersymbol
+    \draw (D) to[switch] (5,5);
+
+    %--- R2 på høyre side ----------------------------------------
+    \draw (B) -- (T2)
+          to[R, l_=$R_2$, a^=$27\,\text{k}\Omega$] (BR);
+
+    %--- Nedre returledning --------------------------------------
+    \draw (BR) -- (F) -- (G);
+
+    %--- Kondensator C1 mellom E og F ----------------------------
+    \draw (F) to[C, l_=$C_1$, a^=$68\,\mu\text{F}$] (E);
+
+\end{circuitikz}
+\caption{Krets for beregning av opp- og utladningsforløp}
+\end{figure}
+
+
+
+Vi skal studere kretsen i to tidsintervaller hvor bryteren i node $D$ er i $A$ og $B$. Når bryteren er tilkoblet node $A$ vil kapasitatoren lades gjennom batteriet $B_1$ og gjennomgå $R_1$ motstanden. Når bryteren er tilkoblet $B$ vil kapasitatoren utlade gjennom motstand $R_2$.
+
+\subsubsection{Tilfelle 1}
+I dette tilfellet skal $D$ til $E$ kortsluttes. Bryteren vil være mot $A$ i tidsintervallet $t \in [0,10\text{s}]$ og den med en gang etterpå tilkobles node $B$ i tidsintervallet $t \in [10\text{s}, 20\text{s}]$.
+
+\begin{figure}[H]
+\centering
+\begin{circuitikz}[american voltages]
+
+    %--- Noder (svarte prikker) ---------------------------------
+    % Bunn/venstre (til jord)
+    \node[circle, fill=black, inner sep=1.2pt] (G)  at (0,0)  {};
+    \node[circle, fill=black, inner sep=1.2pt] (T1) at (0,5)  {}; % etter batteri oppe
+
+    % Øvre gren
+    \node[circle, fill=black, inner sep=1.2pt] (A)  at (4,5)  {};
+    \node[circle, fill=black, inner sep=1.2pt] (B)  at (6,5)  {};
+    \node[circle, fill=black, inner sep=1.2pt] (T2) at (10,5) {};
+
+    % Nedre gren
+    \node[circle, fill=black, inner sep=1.2pt] (BR) at (10,0) {};
+    \node[circle, fill=black, inner sep=1.2pt] (F)  at (5,0)  {};
+    \node[circle, fill=black, inner sep=1.2pt] (E)  at (5,2)  {};
+
+    \node[circle, fill=black, inner sep=1.2pt] (D)  at (5,4)  {};
+
+    %--- Labels på nodene ----------------------------------------
+    \node[above] at (A) {$A$};
+    \node[above] at (B) {$B$};
+    \node[above right] at (E) {$E$};
+    \node[below] at (F) {$F$};
+    \node[right] at (D) {$D$};
+
+    %--- Jord ----------------------------------------------------
+    \draw (G) node[ground] {};
+
+    %--- DE kortslutting
+
+    \draw (D) to[short, -] (E);
+
+    %--- Batteri B1 ----------------------------------------------
+    \draw (T1) to[battery1, l_=$B_1$, a^=$10\,\text{V}$] (G);
+
+    %--- R1 fra batteri til A ------------------------------------
+    \draw (T1) to[R, l_=$R_1$, a^=$12\,\text{k}\Omega$] (A);
+
+    %--- Åpen bryter mellom A og B -------------------------------
+    % "switch" gir en mekanisk brytersymbol
+    \draw (D) to[switch] (5,5);
+
+    %--- R2 på høyre side ----------------------------------------
+    \draw (B) -- (T2)
+          to[R, l_=$R_2$, a^=$27\,\text{k}\Omega$] (BR);
+
+    %--- Nedre returledning --------------------------------------
+    \draw (BR) -- (F) -- (G);
+
+    %--- Kondensator C1 mellom E og F ----------------------------
+    \draw (F) to[C, l_=$C_1$, a^=$68\,\mu\text{F}$] (E);
+
+\end{circuitikz}
+\caption{Kretsen i tilfelle 1}
+\end{figure}
+
+
+
+
+
+
+
+\paragraph{første tidsfase. }
+Siden vi her har en kortslutting fra node $D$ til $A$ kan vi forenkle kretsen som under:
+
+\begin{figure}[H]
+\centering
+\begin{circuitikz}[american voltages]
+
+    %--- Noder (svarte prikker) ---------------------------------
+    % Bunn/venstre (til jord)
+    \node[circle, fill=black, inner sep=1.2pt] (G)  at (0,0)  {};
+    \node[circle, fill=black, inner sep=1.2pt] (T1) at (0,5)  {}; % etter batteri oppe
+
+    % Nedre gren
+    \node[circle, fill=black, inner sep=1.2pt] (F)  at (5,0)  {};
+
+    \node[circle, fill=black, inner sep=1.2pt] (D)  at (5,5)  {};
+
+    %--- Labels på nodene ----------------------------------------
+    \node[below] at (F) {$F$};
+    \node[right] at (D) {$D$};
+
+    %--- Jord ----------------------------------------------------
+    \draw (G) node[ground] {};
+
+    %--- Batteri B1 ----------------------------------------------
+    \draw (T1) to[battery1, l_=$B_1$, a^=$10\,\text{V}$] (G);
+
+    %--- R1 fra batteri til A ------------------------------------
+    \draw (T1) to[R, l_=$R_1$, a^=$12\,\text{k}\Omega$] (D);
+
+    %--- Nedre returledning --------------------------------------
+    \draw (F) -- (G);
+
+    %--- Kondensator C1 mellom E og F ----------------------------
+    \draw (F) to[C, l_=$C_1$, a^=$68\,\mu\text{F}$] (D);
+
+\end{circuitikz}
+\caption{Kretsen i tilfelle 1 i tiden $0 \le t \le 10$}
+\end{figure}
+\noindent
+Studerer vi første fase der vi har en kapasitator som lades av $B_1$ kan vi sette opp uttrykket for spenning over tid.
+\[
+\begin{aligned}
+    V_C(t) &= V_B (1 - \exp \left(-t/\tau\right)) \\
+    V_B &= B_1 = 10\text{V} \\
+    \tau &= R_1C \\
+    \tau &= 12\text{k}\Omega \cdot 68 \cdot 10^{-6} \\
+    \tau &= 0.816\text{s}  
+\end{aligned}
+\]
+\noindent
+Vi løser for $V_C(10)$ med de kjente verdiene våre for å få en verdi for hva spenningen kapasitatoren lagrer er etter $t=10\text{s}$.
+\begin{align}
+    V_C(t) &= 10 \bigl(1 - \exp\left(-t/0.816\right)\bigr) \label{eq:oppgaveAFør10} \\
+    V_C(10) &= 10 \bigl(1 - \exp\left(-12.25\right)\bigr) \nonumber \\
+    V_C(10) &\approx 10 \nonumber
+\end{align}
+
+
+
+
+
+
+
+
+\paragraph{Andre tidsfase. } Her vil vi kortslutte node $D$ til $B$ og vi kan forenkle kretsen.
+
+\begin{figure}[H]
+\centering
+\begin{circuitikz}[american voltages]
+
+    %--- Noder (svarte prikker) ---------------------------------
+
+    % Øvre gren
+    \node[circle, fill=black, inner sep=1.2pt] (T2) at (10,5) {};
+
+    % Nedre gren
+    \node[circle, fill=black, inner sep=1.2pt] (BR) at (10,0) {};
+    \node[circle, fill=black, inner sep=1.2pt] (F)  at (5,0)  {};
+
+    \node[circle, fill=black, inner sep=1.2pt] (D)  at (5,5)  {};
+
+    %--- Labels på nodene ----------------------------------------
+    \node[below] at (F) {$F$};
+    \node[left] at (D) {$D$};
+
+    %--- Jord ----------------------------------------------------
+    \draw (BR) node[ground] {};
+
+    %--- R2 på høyre side ----------------------------------------
+    \draw (D) -- (T2)
+          to[R, l_=$R_2$, a^=$27\,\text{k}\Omega$] (BR);
+
+    %--- Nedre returledning --------------------------------------
+    \draw (BR) -- (F);
+
+    %--- Kondensator C1 mellom E og F ----------------------------
+    \draw (F) to[C, l_=$C_1$, a^=$68\,\mu\text{F}$] (D);
+
+\end{circuitikz}
+\caption{Kretsen i tilfelle 1}
+\end{figure}
+
+\noindent
+Her er tilfelle at bryteren har umiddelbart byttet til $B$ og kapasitatoren har begynt sin utlading gjennom motstand $R_2$. $V_{start}$ vil være $V_C(10)$ fra funksjonen i første tilfelle siden dette skjer umiddelbart etterpå tilfelle 1.
+\[
+\begin{aligned}
+    V_C(t)&=V_{start} \exp \left(-(t-10)/\tau\right) \\
+    V_{start} &= 10V \\
+    \tau &= R_2C \\
+    \tau &= 27\text{k}\Omega \cdot 68 \cdot 10^{-6} \\
+    \tau &= 1.836
+\end{aligned}
+\]
+\noindent
+Nå kan vi lage et generelt uttryk for $V_C$ etter $t = 10\text{s}$. 
+\begin{equation}
+    \label{eq:oppgaveAEtter10}
+    V_C(t)=10\exp\left(-(t-10)/1.836\right)
+\end{equation}
+
+\paragraph{Endelig løsning}
+Nå har vi to uttrykk for før og etter bryterskiftet. Denne funksjonen beskriver spenning over $DF$ på kretsen og beskriver den totale spenningen i dette området. Denne er presentert gjennom $V_{DF}$ som under. Dette er da ligning~\ref{eq:oppgaveAFør10} og ligning~\ref{eq:oppgaveAEtter10}:
+\begin{equation}
+V_C(t) =
+\begin{cases}
+10 \bigl(1 - \exp\left(-t/0.816\right)\bigr), & 0 \le t \le 10, \\
+10\exp\left(-(t-10)/1.836\right) & 10 < t \le 20.
+\end{cases}
+\end{equation}
+
+
+\subsubsection{Tilfelle 2}
+Her er kretsen i figur~\ref{fig:Krets} modellert slik at det vil være en ny kondensator mellom node $E$ og $D$. Den har samme verdi som $C_1$. Kretsen blir seende slik ut nå:
+
+\begin{figure}[H]
+\centering
+\begin{circuitikz}[american voltages]
+
+    %--- Noder (svarte prikker) ---------------------------------
+    % Bunn/venstre (til jord)
+    \node[circle, fill=black, inner sep=1.2pt] (G)  at (0,0)  {};
+    \node[circle, fill=black, inner sep=1.2pt] (T1) at (0,5)  {}; % etter batteri oppe
+
+    % Øvre gren
+    \node[circle, fill=black, inner sep=1.2pt] (A)  at (4,5)  {};
+    \node[circle, fill=black, inner sep=1.2pt] (B)  at (6,5)  {};
+    \node[circle, fill=black, inner sep=1.2pt] (T2) at (10,5) {};
+
+    % Nedre gren
+    \node[circle, fill=black, inner sep=1.2pt] (BR) at (10,0) {};
+    \node[circle, fill=black, inner sep=1.2pt] (F)  at (5,0)  {};
+    \node[circle, fill=black, inner sep=1.2pt] (E)  at (5,2)  {};
+
+    \node[circle, fill=black, inner sep=1.2pt] (D)  at (5,4)  {};
+
+    %--- Labels på nodene ----------------------------------------
+    \node[above] at (A) {$A$};
+    \node[above] at (B) {$B$};
+    \node[above right] at (E) {$E$};
+    \node[below] at (F) {$F$};
+    \node[right] at (D) {$D$};
+
+    %--- Jord ----------------------------------------------------
+    \draw (G) node[ground] {};
+
+    %--- Batteri B1 ----------------------------------------------
+    \draw (T1) to[battery1, l_=$B_1$, a^=$10\,\text{V}$] (G);
+
+    %--- R1 fra batteri til A ------------------------------------
+    \draw (T1) to[R, l_=$R_1$, a^=$12\,\text{k}\Omega$] (A);
+
+    %--- Åpen bryter mellom A og B -------------------------------
+    % "switch" gir en mekanisk brytersymbol
+    \draw (D) to[switch] (5,5);
+
+    %--- R2 på høyre side ----------------------------------------
+    \draw (B) -- (T2)
+          to[R, l_=$R_2$, a^=$27\,\text{k}\Omega$] (BR);
+
+    %--- Nedre returledning --------------------------------------
+    \draw (BR) -- (F) -- (G);
+
+    %--- Kondensator C1 mellom E og F ----------------------------
+    \draw (F) to[C, l_=$C_1$, a^=$68\,\mu\text{F}$] (E);
+
+    %--- Kondensator C1 mellom D og E ----------------------------
+    \draw (E) to[C, l_=$C_2$, a^=$68\,\mu\text{F}$] (D);
+
+\end{circuitikz}
+\caption{Krets for beregning av opp- og utladningsforløp}
+\end{figure}

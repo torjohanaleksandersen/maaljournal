@@ -816,6 +816,38 @@ v_{C1}(t) = v_{C2}(t) = V_{DF}(t).
 
 \begin{figure}[H]
 \centering
+\begin{tikzpicture}
+\begin{axis}[
+    width=0.8\textwidth,
+    height=6cm,
+    xlabel={$t\,[\mathrm{ms}]$},
+    ylabel={$v(t)\,[\mathrm{V}]$},
+    xmin=0, xmax=30,
+    ymin=0, ymax=8.8,
+    ytick={0,2,4,6,8},
+    xtick={0,2,...,30},
+    grid=both
+]
+    \addplot[const plot, very thick, blue]
+        coordinates {
+            (0,8)
+            (9,8)
+            (9,0)
+            (20,0)
+            (20,8)
+            (29,8)
+            (29,0)
+            (30,0)
+        };
+\end{axis}
+\end{tikzpicture}
+\caption{Inngangssignal $v(t)$ med høy-nivå $8\,\mathrm{V}$ i 9\,ms per periode.}
+\end{figure}
+
+
+
+\begin{figure}[H]
+\centering
 \begin{circuitikz}[american voltages]
 
     \node[circle, fill=black, inner sep=1.2pt] (BL)  at (0, 0)  {};
@@ -1013,7 +1045,7 @@ v_0(t) &=
 Siden kondensatoren virkelig trenger uendelig tid for å nå sin maksverdi og uendelig tid for å nå sin minimumsverdi, kan vi bruke en regel. Oppladingstiden er tiden til kondensatoren har nådd ca. 99.3\% og utladingstid er til den har falt til ca. 0.7\% av startverdi. Dette skjer etter omtrent \emph{5 tidskonstanter}.
 \[
 \begin{aligned}
-    t &\approx 5\tau \\
+    t &\approx 5\tau = 5 \cdot 1.69\text{ms}\\
     t &\approx 8.45\text{ms}
 \end{aligned}
 \]

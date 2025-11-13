@@ -1,5 +1,41 @@
 \section{Teori}
 
+\subsection{Kondensator}
+Kondensatoren kan lagre elektrisk energi i feltet sitt. Den vil lade om det er en spenningskilde tilkoblet gjennom en motstand. Den vil også utlade sin lagrede energi dersom det ikke er en tilførende kilde og komponenter den kan overføre spenning over. Det generelle uttrykket for spenning i en kondensator vil være:
+\[
+v_C(t) = V_{slutt} + (V_{initial} - V_{slutt})\cdot\exp\left(-(t-t_0)/\tau\right)
+\]
+\noindent
+$\tau$ her vil være kondensatorstyrken ganget med totalresistansen, $\tau = R_{tot}\cdot C$. Det vil være en ladingsfase og en utladingsfase med kondensatorer, vi kan generalisere formlene i hvert tilfelle. I ladingsfasen har vi initialbetingelser som gir formel:
+\[
+\begin{aligned}
+    V_{slutt} &= V_{kilde} \\
+    V_{initial} &= 0 \\
+    t_0 &= 0 
+\end{aligned}
+\]
+\[
+\begin{aligned}
+    v_{C,opplading}(t) &= V_{slutt} + (0 - V_{slutt})\cdot\exp\left(-(t - 0)/\tau\right) \\
+    v_{C,opplading}(t) &= V_{slutt} + (1 - \exp\left(-t/\tau\right))
+\end{aligned}
+\] 
+\noindent
+I utladingsfasen har vi andre initialbetingelser og vi kan utlede en formel for $v_C(t)$ i denne fasen. Her vil $t_0$ være tiden brukt i oppladingsfasen:
+\[
+\begin{aligned}
+    V_{slutt} &= 0 \\
+    V_{initial} &= v_{C,opplading}(t_0) \\
+    t_0 &= t_0 \\
+\end{aligned}
+\]
+\[
+\begin{aligned}
+    v_{C,nedlading}(t) &= 0 + (v_{C,opplading}(t_0) - 0)\cdot\exp\left(-(t - t_0)/\tau\right) \\
+    v_{C,nedlading}(t) &= v_{C,opplading}(t_0)\cdot\exp\left(-(t - t_0)/\tau\right)
+\end{aligned}
+\] 
+
 \subsection{RC - krets 1}
 \begin{figure}[H]\label{fig:Krets}
 \centering
@@ -225,7 +261,7 @@ Vi løser for $V_C(10)$ med de kjente verdiene våre for å få en verdi for hva
     \draw (BR) -- (F);
 
     %--- Kondensator C1 mellom E og F ----------------------------
-    \draw (F) to[C, l_=$C_1$, a^=$68\,\mu\text{F}$] (D);
+    \draw (D) to[V, l_=$V$, a^=$10\text{V}$] (F);
 
 \end{circuitikz}
 \caption{Kretsen i tilfelle 1}
@@ -443,10 +479,10 @@ Her vil uttrykket for spenningen i den enkelte kapasitatoren være $v_{Cn}(t) = 
     \draw (BR) -- (F);
 
     %--- Kondensator C1 mellom F og E ----------------------------
-    \draw (F) to[C, l_=$C_1$, a^=$68\,\mu\text{F}$] (E);
+    \draw (E) to[V, l_=$V_1$, a^=$5\text{V}$] (F);
 
     %--- Kondensator C1 mellom E og D ----------------------------
-    \draw (E) to[C, l_=$C_2$, a^=$68\,\mu\text{F}$] (D);
+    \draw (D) to[V, l_=$V_2$, a^=$5\text{V}$] (E);
 
 \end{circuitikz}
 \caption{Kretsen i tilfelle 2}
@@ -677,8 +713,8 @@ V_{DF}(10) \approx 10\,\text{V}.
     \draw (EL) -- (E) -- (ER);
 
     %--- Kondensator C1 mellom E og F ----------------------------
-    \draw (FL) to[C, l_=$C_1$, a^=$68\,\mu\text{F}$] (EL);
-    \draw (FR) to[C, l_=$C_2$, a^=$68\,\mu\text{F}$] (ER);
+    \draw (FL) to[V, l_=$V_1$, a^=$10\text{V}$] (EL);
+    \draw (FR) to[V, l_=$V_2$, a^=$10\text{V}$] (ER);
 
 \end{circuitikz}
 \caption{Kretsen i tilfelle 3 med parallellkoblede kondensatorer $C_1$ og $C_2$}
@@ -969,7 +1005,7 @@ Nå kan vi se på et uttrykk for $v_0(t)$. Noden $v_0(t)$ ligger over $3.3\text{
 \begin{aligned}
 v_C(t) &=
 \begin{cases}
-6.1\bigl(1 - \exp\!\left(-\dfrac{t}{1.69\,\text{ms}}\right)\bigr), 
+6.12\bigl(1 - \exp\!\left(-\dfrac{t}{1.69\,\text{ms}}\right)\bigr), 
     & 0 \le t \le 9\,\text{ms},\\[0.5em]
 6.07\,\exp\!\left(-\dfrac{t - 9\,\text{ms}}{1.69\,\text{ms}}\right), 
     & 9\,\text{ms} \le t \le 20\,\text{ms},

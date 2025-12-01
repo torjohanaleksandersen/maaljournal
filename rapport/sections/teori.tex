@@ -1,12 +1,12 @@
 \section{Teori}
 
 \subsection{Kondensator}
-Kondensatoren er en elektrisk komponent som kan lagre elektrisk energi i sitt dielektriske område. Komponenten har en viss kapasitans. Spenningen over kondensatoren bestemmes av formlen under:
+Kondensatoren er en elektrisk komponent som kan lagre elektrisk energi i sitt dielektriske område. Komponenten har en kapasitans og spenningen over kondensatoren etter en bestemt tid bestemmes av formelen under:
 \begin{equation}\label{eq:spenning_i_kondensator}
     v_C(t) = V_{F} + (V_{0} - V_{F})\cdot e^{-(t-t_0)/\tau}
 \end{equation}
 \noindent
-$V_F$ er den endelige mulige spenningen kondensatoren kan oppnå og $V_0$ er startspenningen til kondensatoren. $\tau$ her vil være kondensatorstyrken ganget med totalresistansen sett fra kondensatoren, $\tau = R_{eq}\cdot C$. Basert på om det er en kilde i kretsen eller ikke, har vi en ladnings- og utladingsfase for kondensatoren. Vi kan generalisere formlene i hvert tilfelle. I ladingsfasen har vi initialbetingelser som gir formel:
+$V_F$ er den endelige mulige spenningen kondensatoren kan oppnå og $V_0$ er startspenningen til kondensatoren. $\tau$ her vil være kondensatorstyrken ganget med totalresistansen sett fra kondensatoren, $\tau = R_{eq}\cdot C$. Basert på om det er en kilde i kretsen eller ikke, har vi en ladnings- og utladingsfase for kondensatoren. Vi kan generalisere formlene i tilfellene opplading og utlading. I oppladingsfasen har vi initialbetingelser som gir formel:
 \[
 \begin{aligned}
     V_{F} &= V_{kilde} \\
@@ -81,20 +81,20 @@ I utladingsfasen har vi andre initialbetingelser og vi kan utlede en formel for 
     \draw (F) to[C, l_=$C_1$, a^=$68\,\mu\text{F}$] (E);
 
 \end{circuitikz}
-\caption{Krets for beregning av opp- og utladningsforløp}
+\caption{Krets for beregning av opp- og utladningsfase for én eller flere kondensatorer.}
 \end{figure}
 
 
 
-Vi skal studere kretsen i to tidsintervaller hvor bryteren i node $D$ er i $A$ og $B$. Når bryteren er tilkoblet node $A$ vil kondensatoren lades gjennom batteriet $B_1$. Når bryteren er tilkoblet $B$ vil kondensatoren utlade gjennom motstand $R_2$. Vi vil studere denne kretsen i to tilfeller. Ladingsfase i tiden $0 \le t \le 10$, og en utladingsfase i tiden $10 \le t \le 20$. Dette skal vi gjøre med én kondensator, to kondensatorer i serie og to kondensatorer i parallell.
+Vi skal studere kretsen i to tidsintervaller hvor bryteren i node $D$ er tilkoblet node $A$ eller $B$. Når bryteren er tilkoblet node $A$ vil kondensatoren lades gjennom batteriet $B_1$. Når bryteren er tilkoblet $B$ vil kondensatoren utlade gjennom motstand $R_2$. Ladingsfasen er i tiden $0 \le t \le 10\text{s}$, og utladingsfasen i tiden $10\text{s} \le t \le 20\text{s}$. Dette skal vi gjøre i tilfellene; én kondensator, to kondensatorer i serie, og to kondensatorer i parallell.
 
 
 \subsubsection{Én kondensator $C_1$}
-I dette tilfellet skal $D$ til $E$ kortsluttes og bryteren vil kobles til $A$ i tidsintervallet $t \in [0,10\text{s}]$ og med en gang etterpå tilkobles node $B$ i tidsintervallet $t \in [10\text{s}, 20\text{s}]$. Kretsen i figur \ref{fig:en_kond_figur} viser den overordnede kretsen.
+I dette tilfellet skal $D$ til $E$ kortsluttes. Kretsen i figuren under viser den overordnede kretsen for dette tilfellet.
 
-\begin{figure}[H]\label{fig:en_kond_figur}
+\begin{figure}[H]
 \centering
-\begin{circuitikz}[american voltages]
+\begin{circuitikz}[american voltages]\label{fig:en_kond_figur}
 
     %--- Noder (svarte prikker) ---------------------------------
     % Bunn/venstre (til jord)
@@ -148,11 +148,11 @@ I dette tilfellet skal $D$ til $E$ kortsluttes og bryteren vil kobles til $A$ i 
     \draw (F) to[C, l_=$C_1$, a^=$68\,\mu\text{F}$] (E);
 
 \end{circuitikz}
-\caption{Overordnet krets med én kondensator $C_1$.}
+\caption{RC krets med én kondensator}
 \end{figure}
 
 
-\paragraph{Ladningsprosess $0 < t \le 10$.}
+\paragraph{Ladningsprosess $0 < t \le 10\text{s}$.}
 Siden vi her har en kortslutting fra node $D$ til $A$ kan vi forenkle kretsen.
 
 \begin{figure}[H]
@@ -189,23 +189,22 @@ Siden vi her har en kortslutting fra node $D$ til $A$ kan vi forenkle kretsen.
     \draw (F) to[C, l_=$C_1$, a^=$68\,\mu\text{F}$] (D);
 
 \end{circuitikz}
-\caption{Kretsen i tidsintervallet $0 \le t \le 10$.}
+\caption{Krets for oppladingsfase for én kondensator.}
 \end{figure}
 
-
 \noindent
-Studerer vi første fase der vi har en kapasitator som lades av $B_1$ kan vi sette opp uttrykket for spenning over tid.
+Her lades kapasitatoren av $B_1$ gjennom $R_1$ og vi kan sette opp uttrykket for spenningen i $C_1$.
 \[
 \begin{aligned}
     V_C(t) &= V_F (1 -  e^ {-t/\tau}) \\
     V_F &= B_1 = 10\text{V} \\
     \tau &= R_1C \\
-    \tau &= 12\text{k}\Omega \cdot 68 \cdot 10^{-6} \\
+    \tau &= 12 \cdot 10^3 \Omega \cdot 68 \cdot 10^{-6}\text{F} \\
     \tau &= 0.816\text{s}  
 \end{aligned}
 \]
 \noindent
-Vi løser for $V_C(10)$ for å vite hvilken spenningspotensial som er over kondensatoren ved $t=10\text{s}$. Dette blir startspenningen i utladingsfasen.
+Vi løser for $V_C(10)$ for å vite hvor mye spenning som kondensatoren har ved starten av utladingsfasen.
 \begin{align}
     V_C(t) &= 10 \left(1 -  e^{-t/0.816}\right) \label{eq:oppgaveAFør10} \\
     V_C(10) &= 10 \left(1 -  e^{-12.25}\right) \nonumber \\
@@ -219,7 +218,7 @@ Vi løser for $V_C(10)$ for å vite hvilken spenningspotensial som er over konde
 
 
 
-\paragraph{Utladingsprosess $10 \le t \le 20$.} Her vil vi kortslutte node $D$ til $B$, kondensatoren lagrer nå en spenning og blir en spenningskilde som avtar her.
+\paragraph{Utladingsprosess $10\text{s} \le t \le 20\text{s}$.} Her vil vi kortslutte node $D$ til $B$, kondensatoren lagrer nå en spenning og blir en spenningskilde som avtar her.
 
 \begin{figure}[H]
 \centering
@@ -254,7 +253,7 @@ Vi løser for $V_C(10)$ for å vite hvilken spenningspotensial som er over konde
     \draw (D) to[V, l_=$V$, a^=$10\text{V}$] (F);
 
 \end{circuitikz}
-\caption{Kretsen i tidsintervallet $10 \le t \le 20$.}
+\caption{Krets for utladingsfase for én kondensator.}
 \end{figure}
 
 \noindent
@@ -274,18 +273,18 @@ Her starter kondensatoren sin utlading gjennom motstand $R_2$. $V_{0}$ vil være
 \end{equation}
 
 \paragraph{Endelig løsning. }
-Nå har vi to uttrykk for før og etter bryterskiftet. Denne funksjonen beskriver spenning over $DF$ på kretsen i figur~\ref{fig:en_kond_figur} i tidsintervallet $0 \le t \le 20$. Dette er da ligning~\ref{eq:oppgaveAFør10} og ligning~\ref{eq:oppgaveAEtter10} med sine respektive tider:
+Nå har vi to uttrykk for før og etter bryterskiftet. Denne funksjonen beskriver spenning over $DF$ på kretsen i figur~\ref{fig:en_kond_figur} i tidsintervallet $0 \le t \le 20\text{s}$. Dette er da ligning~\ref{eq:oppgaveAFør10} og ligning~\ref{eq:oppgaveAEtter10} med sine respektive tider:
 \begin{equation}
 V_C(t) =
 \begin{cases}
-10 \left(1 -  e^{-t/0.816}\right), & 0 \le t \le 10, \\
-10 e^{-(t-10)/1.836} & 10 < t \le 20.
+10 \left(1 -  e^{-t/0.816}\right), & 0 \le t \le 10\text{s}, \\
+10 e^{-(t-10)/1.836} & 10\text{s} < t \le 20\text{s}.
 \end{cases}
 \end{equation}
 
 
 \subsubsection{To kondensatorer i seriekobling}\label{subsec:tilfelle2iSerie}
-Her er kretsen i figur~\ref{fig:Krets} modellert slik at det vil være en ny kondensator mellom node $E$ og $D$. Den har samme verdi som $C_1$, men navngitt $C_2$. Kretsen blir seende slik ut nå:
+Kretsen figur~\ref{fig:Krets} har en ny kondensator $C_2$ mellom node $E$ og $D$. Den har samme verdi som $C_1$. Kretsen blir seende slik ut nå:
 
 \begin{figure}[H]
 \centering
@@ -342,11 +341,11 @@ Her er kretsen i figur~\ref{fig:Krets} modellert slik at det vil være en ny kon
     \draw (E) to[C, l_=$C_2$, a^=$68\,\mu\text{F}$] (D);
 
 \end{circuitikz}
-\caption{To kondensatorer i seriekobling. }
+\caption{RC krets med to kondensatorer i seriekobling. }
 \end{figure}
 
 \noindent
-I denne kretsen kan vi beskrive de ulike spenningene over $DF$. Det vil være én spenning over $C_1$, én over $C_2$ og vi kan også beskrive spenningen over hele $DF$. Siden disse er i seriekobling, strømmen vil være like over $DF$, og både $C_1$ og $C_2$ er like kan vi se at spenningen over begge kondensatorene må være like.
+I denne kretsen kan vi beskrive de ulike spenningene over $DF$. Det vil være én spenning over $C_1$, én over $C_2$ og vi kan også beskrive spenningen over hele $DF$. Siden disse er i seriekobling, strømmen vil være like over $DF$. Både $C_1$ og $C_2$ har samme strøm gjennom slik at kapasitansen i dem må være like som utledet under.
 \[
 \begin{aligned}
     i_{EF} &= C_1\frac{dv_{C1}}{dt} \\
@@ -372,7 +371,7 @@ Og vi har uttryk for alle spenningene på skinnen $DF$:
 \noindent
 Nå skal vi analysere kretsen i lade- og utladingsprosessen. For å kunne bruke spenning i kondensatorformlen må vi behandle $C_1$ og $C_2$ som én totalkapasitator. Da må vi finne totalkapasitansen sett fra $DF$. $C_{tot}$ blir: $\left(C_{tot}\right)^{-1} = \left(C_1\right)^{-1} + \left(C_2\right)^{-1} \rightarrow C_{tot} = 34 \mu\text{F}$. 
 
-\paragraph{Ladingsprosess $0 \le t \le 10$. } Her har vi en kortslutting fra $D$ til $A$.
+\paragraph{Ladingsprosess $0 \le t \le 10\text{s}$. } Her har vi en kortslutting fra $D$ til $A$.
 
 \begin{figure}[H]
 \centering
@@ -414,7 +413,7 @@ Nå skal vi analysere kretsen i lade- og utladingsprosessen. For å kunne bruke 
     \draw (E) to[C, l_=$C_2$, a^=$68\,\mu\text{F}$] (D);
 
 \end{circuitikz}
-\caption{To kondensatorer i seriekobling i tiden $0 \le t \le 10$.}
+\caption{Krets for oppladingsfase for to kondensatorer i seriekobling. }
 \end{figure}
 
 \noindent
@@ -426,7 +425,7 @@ Vi finner \emph{tau} og uttrykket for $V_{DF}(t)$ fra sekund $0$ til $10$:
     \tau &= 0.408\text{s} \\
     V_{DF}(t) &= V_B (1 -  e^ {-t/\tau}) \\
     V_{DF}(t) &= 10 (1 -  e^ {-t/0.408}) \\
-    V_{DF}(10) &\approx 10
+    V_{DF}(10) &\approx 10\text{V}
 \end{aligned}
 \]
 Her vil uttrykket for spenningen i den enkelte kondensatoren være $v_{Cn}(t) = \frac{1}{2}V_{DF}(t)$.
@@ -436,7 +435,7 @@ Her vil uttrykket for spenningen i den enkelte kondensatoren være $v_{Cn}(t) = 
 
 
 
-\paragraph{Utladingsprosess $10 \le t \le 20$. } Her vil vi kortslutte fra $D$ til $B$ og forenkle kretsen som under.
+\paragraph{Utladingsprosess $10\text{s} \le t \le 20\text{s}$. } Her vil vi kortslutte fra $D$ til $B$ og forenkle kretsen som under.
 \begin{figure}[H]
 \centering
 \begin{circuitikz}[american voltages]
@@ -475,13 +474,11 @@ Her vil uttrykket for spenningen i den enkelte kondensatoren være $v_{Cn}(t) = 
     \draw (D) to[V, l_=$V_2$, a^=$5\text{V}$] (E);
 
 \end{circuitikz}
-\caption{To kondensatorer i seriekobling i tiden $10 \le t \le 20$.}
+\caption{Krets for utladingsfase for to kondensatorer i seriekobling. }
 \end{figure}
 
 
 
-\noindent
-Utregning for $V_{DF}(t)$ innebærer å vite $V_{DF}(10)$ i ladingsprosessen. Denne er da $\left(\approx 10\right)$. $V_{DF}(t)$ for denne utladeprosessen er som under.
 \[
 \begin{aligned}
     \tau &= R_2 C_{tot} \\
@@ -493,14 +490,17 @@ Utregning for $V_{DF}(t)$ innebærer å vite $V_{DF}(10)$ i ladingsprosessen. De
 
 \paragraph{Endelig uttrykk. }
 \[
-V_{DF}(t) = \begin{cases}
-    10\left(1 -  e^ {-t / 0.408}\right), 0 \le t \le 10, \\ 10 e^{-(t - 10)/0.918}, 10 \le t \le 20 
-\end{cases}
-\]
-\[
-v_{C1}(t) = v_{C2}(t) = \begin{cases}
-    5\left(1 -  e^ {-t / 0.408}\right), 0 \le t \le 10, \\ 5 e^{-(t - 10)/0.918}, 10 \le t \le 20 
-\end{cases}
+\begin{aligned}
+    V_{DF}(t) &= 
+    \begin{cases}
+        10\left(1 -  e^ {-t / 0.408}\right), 0 \le t \le 10, \\ 10 e^{-(t - 10)/0.918}, 10 \le t \le 20 
+    \end{cases}
+    \\[1.2em]
+    v_{C1}(t) = v_{C2}(t) &= 
+    \begin{cases}
+        5\left(1 -  e^ {-t / 0.408}\right), 0 \le t \le 10, \\ 5 e^{-(t - 10)/0.918}, 10 \le t \le 20 
+    \end{cases}
+\end{aligned}
 \]
 
 
@@ -576,7 +576,7 @@ Her skal vi kortslutte $DE$ og parallelkoble $C_2$ med $C_1$ mellom $FE$. Kretse
     \draw (FR) to[C, l_=$C_2$, a^=$68\,\mu\text{F}$] (ER);
 
 \end{circuitikz}
-\caption{Parallellkoblede kondensatorer $C_1$ og $C_2$}
+\caption{RC krets med to kondensatorer i parallellkobling. }
 \end{figure}
 
 \noindent
@@ -637,7 +637,7 @@ v_{C1}(t) = v_{C2}(t) = V_{DF}(t).
     \draw (FR) to[C, l_=$C_2$, a^=$68\,\mu\text{F}$] (ER);
 
 \end{circuitikz}
-\caption{Parallellkoblede kondensatorer i tiden $0 \le t \le 10\,\text{s}$}
+\caption{Krets for oppladingsfasen for to kondensatorer i parallellkobling. }
 \end{figure}
 
 \noindent
@@ -646,14 +646,14 @@ Her ser vi en spenningskilde $B_1$ som lader opp en ekvivalent kapasitans $C_{to
 \begin{aligned}
     \tau &= R_1 C_{tot} \\
     \tau &= 12\text{k}\Omega \cdot 136 \cdot 10^{-6} \\
-    \tau &= 1.632\,\text{s}, \\[0.5em]
-    V_{DF}(t) &= V_B\bigl(1 -  e^(-t/\tau)\bigr) \\
-    V_{DF}(t) &= 10\bigl(1 -  e^(-t/1.632)\bigr), \qquad 0 \le t \le 10.
+    \tau &= 1.632\,\text{s} \\
+    V_{DF}(t) &= V_B\bigl(1 -  e^{(-t/\tau)}\bigr) \\
+    V_{DF}(t) &= 10\bigl(1 -  e^{(-t/1.632)}\bigr)
 \end{aligned}
 \]
 Siden kondensatorene er parallellkoblet, har vi
 \[
-v_{C1}(t) = v_{C2}(t) = V_{DF}(t), \qquad 0 \le t \le 10.
+v_{C1}(t) = v_{C2}(t) = V_{DF}(t)
 \]
 
 \noindent
@@ -715,27 +715,24 @@ V_{DF}(10) \approx 10\,\text{V}.
     \draw (ER) to[V, l_=$V_2$, a^=$10\text{V}$] (FR);
 
 \end{circuitikz}
-\caption{Parallellkoblede kondensatorer $C_1$ og $C_2$ i tiden $10\text{s} \le t \le 20 \text{s}$}
+\caption{Krets for utladingsfasen for to kondensatorer i parallellkobling. }
 \end{figure}
 
 
 \noindent
 Når bryteren umiddelbart etterpå kobles til node $B$, vil de to parallellkoblede kondensatorene utlades gjennom motstanden $R_2$ på samme måte som én kapasitans $C_{tot}$.
-
-\noindent
-For utladingen i tidsintervallet $t \in [10\,\text{s}, 20\,\text{s}]$ får vi
 \[
 \begin{aligned}
     \tau &= R_2 C_{tot} \\
     \tau &= 27\text{k}\Omega \cdot 136 \cdot 10^{-6} \\
-    \tau &= 3.672\,\text{s}, \\[0.5em]
+    \tau &= 3.672\,\text{s}
     V_{DF}(t) &= V_{DF}(10)\, e^{-(t-10)/\tau} \\
-    V_{DF}(t) &\approx 10\, e^{-(t-10)/3.672}, \qquad 10 \le t \le 20.
+    V_{DF}(t) &\approx 10\, e^{-(t-10)/3.672}
 \end{aligned}
 \]
 Igjen er spenningen over hver av kondensatorene lik spenningen over $DF$:
 \[
-v_{C1}(t) = v_{C2}(t) = V_{DF}(t), \qquad 10 \le t \le 20.
+v_{C1}(t) = v_{C2}(t) = V_{DF}(t)
 \]
 
 \paragraph{Endelig uttrykk. }
@@ -743,8 +740,8 @@ Vi kan nå samle resultatene for hele tidsintervallet:
 \[
 V_{DF}(t) =
 \begin{cases}
-10\bigl(1 -  e^{-t/1.632}\bigr), & 0 \le t \le 10, \\
-10 e^{-(t-10)/3.672}, & 10 \le t \le 20,
+10\bigl(1 -  e^{-t/1.632}\bigr), & 0\text{s} \le t \le 10\text{s}, \\
+10 e^{-(t-10)/3.672}, & 10\text{s} \le t \le 20\text{s},
 \end{cases}
 \]
 og spenningen over hver av kondensatorene er
@@ -758,7 +755,7 @@ v_{C1}(t) = v_{C2}(t) = V_{DF}(t).
 
 
 \subsubsection{Grafen av $V_{DF}(t)$}
-Vi har tre tilfeller. Tilfelle 1-3 er; én alene, to i seriekobling og to i parallellkobling. Grafing er under.
+Vi har tre tilfeller. Tilfelle 1-3 for kondensatorer er; én alene, to i seriekobling og to i parallellkobling. Grafing er under.
 
 \begin{figure}[H]
 \centering
@@ -851,7 +848,7 @@ Vi har tre tilfeller. Tilfelle 1-3 er; én alene, to i seriekobling og to i para
 
 
 
-\subsection{RC - krets 2}
+\subsection{RC - krets 2}\label{subsec:rc-krets-teori}
 
 \begin{figure}[H]\label{fig:grafet_v_av_t}
 \centering
@@ -885,7 +882,7 @@ Vi har tre tilfeller. Tilfelle 1-3 er; én alene, to i seriekobling og to i para
 
 
 
-\begin{figure}[H]
+\begin{figure}[H]\label{fig:krets-med-rc-ledd}
 \centering
 \begin{circuitikz}[american voltages]
 
@@ -934,10 +931,10 @@ Ser vi på grafen i figur~\ref{fig:grafet_v_av_t} kan vi trekke ut DutyCycle, fr
 \end{aligned}
 \]
 \noindent
-Analyserer vi grafen ser vi at perioden er $20\text{ms}$, fordi kurven har samme tilstand, verdi og retning i enhver punkt på grafen med $20\text{ms}$ i avstand. Dette er da $T_{periode}$. Vi ser også at tiden grafen er på sin $V_{maks}$ er $9\text{ms}$. Dette er da $T_{topp}$. Grafens $V_{min}$ og $V_{maks}$ er henholdsvis $0\text{V}$ og $8\text{V}$. Da som vi har verdier løser vi for DutyCycle, frekvens og symmetrilinje under:
+Analyserer vi grafen ser vi at perioden er $20\text{ms}$ fordi kurven har samme tilstand, verdi og retning i enhver punkt på grafen med $20\text{ms}$ i avstand. Dette er da $T_{periode}$. Vi ser også at tiden grafen er på sin $V_{maks}$ er $9\text{ms}$. Dette er da $T_{topp}$. Grafens $V_{min}$ og $V_{maks}$ er henholdsvis $0\text{V}$ og $8\text{V}$. Da som vi har verdier løser vi for DutyCycle, frekvens og symmetrilinje under:
 \[
 \begin{aligned}
-    T_{periode} = 20\text{ms}, \quad T_{topp} = 9\text{ms}, & \quad V_{min} = 0\text{V}, \quad V_{maks} = 8\text{V} \\
+    T_{periode} = 20\text{ms}, \quad T_{topp} = 9\text{ms}, & \quad V_{min} = 0\text{V}, \quad V_{maks} = 8\text{V} \\[1.2em]
     DutyCycle &= \frac{9\text{ms}}{20\text{ms}} = 0.45 = 45\% \\
     f &= \frac{1}{20\text{ms}} = 50 \text{Hz} \\
     V_{sym} &= \frac{0\text{V} + 8\text{V}}{2} = 4\text{V}
@@ -945,7 +942,7 @@ Analyserer vi grafen ser vi at perioden er $20\text{ms}$, fordi kurven har samme
 \]
 
 \subsubsection{$v_C(t)$ og $v_0(t)$ i kretsen}
-Først kan vi finne maksimal spenning i node $A$ over kondensatoren. Inngangsspenningen vil produsere en spenning lik $V_{max}$ som betyr at når $v(t) = 8\text{V}$ har stått på lenge vil kondensatoren være i likespenningstilstand. Sett fra spenningskilden ligger alle motstandene i serie til jord. Dermed kan vi regne $R_{last}$ etter node $A$. Og dermed vil maksimumsspenningen i node $A$ kunne uttrykkes som:
+$v_C(t)$ kan beskrives som spenningen ved node A. Maksimumspenning i node A kan løses for med spenningsdeling sett fra spenningskilden til node A. $R_{last}$ er totalmotstanden fra node A til jording og vi kan løse for teoretisk maksimumspenning i kondensatoren.
 \[
 \begin{aligned}
     R_{last} &= \left(3.9 + 3.3\right){k}\Omega \\
@@ -961,7 +958,7 @@ Først kan vi finne maksimal spenning i node $A$ over kondensatoren. Inngangsspe
 \]
 
 \noindent
-Dette er den maksimale spenningen kondensatoren kan få hvis den får "uendelig" tid på å lade. Nå kan vi beregne tidskonstanten $\tau$. For dette kortslutter vi spenningskilden, dermed er det to grener til jord.
+Dette er den maksimale spenningen kondensatoren kan få hvis den får tilstrekkelig tid på å lade. Nå kan vi beregne tidskonstanten $\tau$. For dette kortslutter vi spenningskilden, dermed er det to grener til jord. $R_{eq}$ er totalmotstanden fra node A til jord.
 \[
 \begin{aligned}
     R_{eq} &= 2.2\text{k}\Omega || (3.9+3.3)\text{k}\Omega \\
@@ -973,7 +970,7 @@ Dette er den maksimale spenningen kondensatoren kan få hvis den får "uendelig"
 \]
 
 \noindent
-Nå kan vi gi et uttrykk for $v_C(t)$. Først ser vi på ladefasen. Når inngangen hopper til $8\text{V}$ ved et tidspunkt $t_0$, og kondensatoren har verdi $v_C(t_0)$, får vi:
+Nå kan vi gi et uttrykk for $v_C(t)$. Først ser vi på ladefasen. Når inngangen hopper til $8\text{V}$ ved et tidspunkt $t_0$ og kondensatoren har verdi $v_C(t_0)$, får vi:
 \[
 v_C(t) = V_{A,max} + \left(v_C(t_0) - V_{A,max}\right) \cdot e ^{-\left(t-t_0\right)/\tau}
 \]
@@ -985,17 +982,17 @@ Men, vi har initialbetingelsen $v_C(0) = 0$ og signalet er høyt fra $t \in [0, 
     v_C(t) &= 6.12\left(1 -  e^{-t\cdot10^3/1.69}\right), \qquad 0 \le t \le 9\text{ms}
 \end{aligned}
 \]
-Etter ladefasen har vi utladefasen, det vil være når $v(t)=0$. Når inngangen går til $0\text{V}$ved $t=9\text{ms}$ vil spenningen over kondensatoren avta mot 0 med samme tidskonstant. Dette kan vi uttrykke som:
+Etter ladefasen har vi utladefasen, det vil være når $v(t)=0$. Når inngangsspenningen går til $0\text{V}$ ved $t=9\text{ms}$ vil spenningen over kondensatoren avta mot 0 med samme tidskonstant. Dette uttrykket gjelder i tidsrommet $t \in [9\text{ms}, 20\text{s}]$.
 \[
 \begin{aligned}
-    v_C(t)&=v_C(9\text{ms}) e^ {-(t-9\text{ms})/\left(1.69\text{ms}\right)} \\
+    v_C(t)&=v_C(9\text{ms}) \cdot e^ {-(t-9\text{ms})/\left(1.69\text{ms}\right)} \\
     v_C(9\text{ms})&=V_{A,max}\left(1- e^{\left(-9\text{ms}\right)/1.69\text{ms}}\right) \\
     v_C(9\text{ms})&=6.07 \\
     v_C(t) &=6.07 e^{-(t-9\text{ms})/\left(1.69\text{ms}\right)}
 \end{aligned}
 \]
 \noindent
-Nå kan vi se på et uttrykk for $v_0(t)$. Noden $v_0(t)$ ligger over $3.3\text{k}\Omega$. Dette danner en spenningsdeler sammen med $3.9\text{k}\Omega$. Vi kan bruke ligningen for spenningsdeling og regne ut $v_0(t)$.
+Nå kan vi se på et uttrykk for $v_0(t)$. Noden $v_0(t)$ ligger over motstanden $3.3\text{k}\Omega$. Dette danner en spenningsdeler sammen med $3.9\text{k}\Omega$. Vi kan bruke ligningen for spenningsdeling og regne ut $v_0(t)$.
 \[
 \begin{aligned}
     v_0(t)&=\frac{3.3\text{k}\Omega}{3.9\text{k}\Omega+3.3\text{k}\Omega}v_C(t) \\
@@ -1025,7 +1022,7 @@ v_0(t) &=
 \]
 
 
-\begin{figure}[H]
+\begin{figure}[H]\label{fig:teor_vC_ogv0}
 \centering
 \begin{tikzpicture}
 \begin{axis}[

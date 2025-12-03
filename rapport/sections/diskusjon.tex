@@ -1,6 +1,6 @@
 \section{Diskusjon}
 
-\subsection{Måling på RC-ledd}
+\subsection{Måling på RC-ledd 1}
 \subsubsection{Én kondensator}
 Signalgeneratoren ble stilt inn på $f=150\text{Hz}$ og amplituden målte $1.0\text{V{p-p}}$ på oscilloskopet. Kretsen under viser målingsutgangspunktet.
 
@@ -29,6 +29,7 @@ Signalgeneratoren ble stilt inn på $f=150\text{Hz}$ og amplituden målte $1.0\t
 
 \noindent
 Resultatet i figur~\ref{fig:rc_ledd_alene} gir et godt bilde av hva som er spenningen over kondensatoren i forhold til spenningskilden. Spenningen i kondensatoren vil nærme seg firkantpulsen eksponensielt og resultatet kan vi si er godt innafor. Videre kan vi se på spenningen over motstanden $R_4$. For å kunne måle spenningen over denne motstanden må vi gjøre om på kretsen for å unngå å måle over ingen spenningsforskjell. Kretsen blir nå seende slik ut.
+
 \begin{figure}[H]
 \centering
 \begin{circuitikz}[american voltages]
@@ -54,12 +55,14 @@ Resultatet i figur~\ref{fig:rc_ledd_alene} gir et godt bilde av hva som er spenn
 
 \noindent
 Resultatet i figur~\ref{fig:spenning_R4} kan vi også si er riktig. Dette er fordi grafen kan forklares med å se på strømmen gjennom motstanden. Siden spenningen over motstanden beskrives som $V_R(t)$ = $R_4i(t)$. I et RC-ledd vil strømmen bestemmes av derivert spenning over kondensatoren:
+
 \[
 \begin{aligned}
     i(t)&=C\frac{dv_C(t)}{dt} \\
     v_R(t)&=RC\frac{dv_C(t)}{dt}
 \end{aligned}
 \]
+
 \noindent
 Nå kan vi se at spenningen over motstanden bestemmes av endringen i spenningen i kondensatoren. Derfor vil det bli stor spenning over motstanden når kondensatorspenningen stiger eller faller raskt. Når spenningen over kondensatoren flater ut vil derfor $V_R(t)$ eksponentielt synke mot null. Vi kan grafe $V_C(t)$, $V_1(t)$ og $V_R(t)$ for å se forholdet mellom dem. Ved å bruke de kjente verdiene og sette dem inn i ligning~\ref{eq:spenning_i_kondensator}.
 
@@ -242,6 +245,7 @@ Siden dette er teoretisk tilnærming med verdiene vi har er ikke grafen helt lik
 \end{figure}
 
 Resultatet på oscilloskopet i figur~\ref{fig:rc_ledd_ser} er et godt bilde av teorien. Vi må se på  totalkapasitanten for å besvare hvorfor. Totalkapasitansen i serie regnes på formen: $C_{tot}^{-1} = C_1^{-1} + \dots + C_N^{-1}$. I denne kretsen vil da totalkapasitansen være.
+
 \[
 \begin{aligned}
     C_{tot}^{-1} &= C_7^{-1} + C_8^{-1} \\
@@ -249,8 +253,9 @@ Resultatet på oscilloskopet i figur~\ref{fig:rc_ledd_ser} er et godt bilde av t
     C_{tot} &= 235\text{nF}
 \end{aligned}
 \]
+
 \noindent
-Dette betyr at siden totalkapasitansen er lavere vil da tidskonstanten også være lavere, kondensatoren vil ha en lavere oppladings- og nedladingstid. Resultatet viser akkurat dette sammenliknet med bare én kondensator, siden tidskonstanten er lavere vil endringen i spenning være raskere.
+Dette betyr at siden totalkapasitansen er lavere vil da tidskonstanten også være lavere, kondensatoren vil ha en lavere oppladings- og utladingstid. Resultatet viser akkurat dette sammenliknet med bare én kondensator, siden tidskonstanten er lavere vil endringen i spenning være raskere.
 
 
 
@@ -291,6 +296,7 @@ Dette betyr at siden totalkapasitansen er lavere vil da tidskonstanten også væ
 \end{figure}
 
 For å besvare hvorfor dette resultatet er et riktig bilde av teorien må vi se på totalkapasitanten. Totalkapasitansen her representeres av $C_1$ og $C_2$ i parallellkobling. Kondensatorer i parallellkobling vil gi en totalkapasitans av summen av dem.
+
 \[
 \begin{aligned}
     C_{tot} &= 470\text{nF} + 470\text{nF} \\
@@ -299,7 +305,7 @@ For å besvare hvorfor dette resultatet er et riktig bilde av teorien må vi se 
 \]
 
 \noindent
-Denne totalkapasitanten forteller oss at tidskonstanten vil være høyere enn hva den vil være hvis det var én kondensator alene. Derfor vil kondensatorene her lades og utlades på en lavere hastighet enn ved seriekoblede kondensatorer. Derfor vil dette resultatet være et bra bilde.
+Denne totalkapasitanten forteller oss at tidskonstanten vil være høyere enn hva den vil være hvis det var én kondensator alene. Derfor vil kondensatorene her lades og utlades med lavere hastighet enn ved seriekoblede kondensatorer. Derfor vil dette resultatet være et bra bilde.
 
 
 
@@ -307,8 +313,18 @@ Denne totalkapasitanten forteller oss at tidskonstanten vil være høyere enn hv
 
 
 \subsubsection{Sammenlikning av tilfellene}
+For å sammenlikne tilfellene må vi diskutere hvorfor grafene stiger og synker på forskjellige hastigheter fra hverandre. Resultatene er gode bilder av hvordan spenningen over kondensatorer utgjør seg i praksis i tilfellene våre; én kondensator, seriekoblet og parallellkoblet kondensatorer. Ser vi på formelen for opplading og nedlading i spenning for kondensatorer ser vi at det bestemmes av hva \emph{Euler's konstant} er opphøyd til. Det bestemmes derfor bare av tidskonstanten, \emph{tau}. Tidskonstanten er regnet ut som $\tau = R\cdot C_{tot}$. Siden motstanden er konstant vil tidskonstanten være lineær med den totale kapasitansen over området.
+\\[1em]
+Totalkapasitansen vil være forskjellig i hvert tilfelle. Siden vi har like kapasitanser på $C = 470\text{nF}$, vil da hvert tilfelle gi kapasitansene:
 
+\begin{align*}
+    C_{én} &= 470\text{nF} \\
+    C_{ser} &= 235\text{nF} \\
+    C_{par} &= 940\text{nF}
+\end{align*}
 
+\noindent
+Disse ulike verdiene forteller oss at parallellkoblede kondensatorer vil bruke lengre tid på å lade opp, men også lengre tid på å lade ut. Tilfellet for seriekoblede vil være motsatt. Det er akkurat dette resultatet viser og det samsvarer godt med teorien i graf~\ref{fig:teoretisk_tilfellene_1til3}.
 
 
 
@@ -319,7 +335,8 @@ Denne totalkapasitanten forteller oss at tidskonstanten vil være høyere enn hv
 
 \subsection{Måling av RL-ledd}
 Kretsen for målingen av spole induktans er som i kretsen i figur~\ref{fig:rl-ledd}. Innstillingene for funksjonsgeneratoren er frekvens, $f = 100 \text{kHz}$ og amplitude slik at oscilloskopet måler $1.0V_{\text{pp}}$.
-\begin{figure}[H]\label{fig:rl-ledd}
+
+\begin{figure}[H]
 \centering
 \begin{circuitikz}[american voltages]
 
@@ -344,6 +361,7 @@ Kretsen for målingen av spole induktans er som i kretsen i figur~\ref{fig:rl-le
 
 \end{circuitikz}
 \caption{Krets for måling av RL-ledd.}
+\label{fig:rl-ledd}
 \end{figure}
 
 \noindent
@@ -358,6 +376,7 @@ Dette kan forklares ved at funksjonsgeneratoren i praksis ikke er en ideell spen
 \[
 v_L = L\cdot \frac{di}{dt}
 \]
+
 \noindent
 Denne induserte spenningen legger seg oppå kildespenningen og gjør at den målte totalspenningen får en kortvarig topp (oversving) før den avtar eksponentielt mot et stasjonært nivå. Når pulsen går fra høy til lav skjer det motsatte: spolen forsøker å opprettholde strømmen og induserer en spenning med motsatt fortegn, noe som gir et negativt “dropp” i totalspenningen.
 \\[1em]
@@ -367,20 +386,29 @@ Summen av spenningen over motstanden og spenningen over spolen er likevel lik ki
 \noindent
 I figuren under viser vi den teoretiske spenningen over motstanden, spolen og totalspenningen i kretsen. 
 Den teoretiske responsen er basert på standardligningen for en seriekoblet RL-krets
+
 \[
 L\frac{di}{dt} + (R + R_s)\,i(t) = V_s(t),
 \]
+
+\noindent
 der $R_s$ er funksjonsgeneratorens interne motstand. Løsningen gir en eksponentiell strømrespons med 
-tidskonstant 
+tidskonstant.
+
 \[
 \tau = \frac{L}{R + R_s}.
 \]
-Spenningene som plottes er deretter beregnet som 
+
+\noindent
+Spenningene som plottes er deretter beregnet som:
+
 \[
 v_R(t) = i(t)R, \qquad 
 v_L(t) = L\,\frac{di}{dt}, \qquad 
 v_{\text{tot}}(t) = V_s(t) - i(t)R_s.
 \]
+
+\noindent
 Disse teoretiske kurvene stemmer godt overens med måleresultatene, spesielt når vi tar hensyn til 
 kildeimpedansen og oscilloskopets skaleringsfeil.
 
@@ -528,7 +556,8 @@ kildeimpedansen og oscilloskopets skaleringsfeil.
 
 
 
-\subsection{Krets med RC-ledd}
+\subsection{Måling på RC-ledd 2}
 Dette resultatet kommer fra teorien i~\ref{subsec:rc-krets-teori}. Resultatene presenterer målinger av akkurat denne kretsen med samme firkantpuls på spenningskilden. Resultatene må sammenliknes med figur~\ref{fig:teor_vC_ogv0}, og vi ser at resultatene stemmer. Grafen vokser og synker presist som teorien foreslår, og amplituden er riktig på både $v_c(t)$ og $v_0(t)$. Avviket er $0.16\%$ på målingen for $v_c(t)$ med en teoretisk verdi på $6.07$ og en praktisk måling på $6.08$. Avviket for $v_0(t)$ er $1.44\%$ med en praktisk måling på 2.82V og en teoretisk verdi på 2.78V. Resultatene kan vi derfor påstå at er gode og pålitelige. Grafene er riktig.
 \\[1em]
+\noindent
 Sammenhengen mellom grafene er også viktig å analysere. For å svare på hvorfor selve funksjonsoppførselen er lik, men amplituden er annerledes må vi ser på kretsen i figur~\ref{fig:krets-med-rc-ledd}. Spenningen for kondensatoren er gitt ved spenningen i node A, og spenningen over $3.3\text{k}\Omega$ motstanden er begge gitt ved to forskjellige spenningsdelere. Node A vil matematisk ha høyere spenning enn $v_0$. Dermed vil grafene oppføre seg likt i form av øking og synking, men med forskjellig hastighet og vil dermed få forskjellig amplitude i spenningen.

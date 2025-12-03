@@ -2,34 +2,27 @@
 
 \subsection{Kondensator}
 Kondensatoren er en elektrisk komponent som kan lagre elektrisk energi i sitt dielektriske område. Komponenten har en kapasitans og spenningen over kondensatoren etter en bestemt tid bestemmes av formelen under:
+
 \begin{equation}\label{eq:spenning_i_kondensator}
     v_C(t) = V_{F} + (V_{0} - V_{F})\cdot e^{-(t-t_0)/\tau}
 \end{equation}
+
 \noindent
-$V_F$ er den endelige mulige spenningen kondensatoren kan oppnå og $V_0$ er startspenningen til kondensatoren. $\tau$ her vil være kondensatorstyrken ganget med totalresistansen sett fra kondensatoren, $\tau = R_{eq}\cdot C$. Basert på om det er en kilde i kretsen eller ikke, har vi en ladnings- og utladingsfase for kondensatoren. Vi kan generalisere formlene i tilfellene opplading og utlading. I oppladingsfasen har vi initialbetingelser som gir formel:
+$V_F$ er den endelige mulige spenningen kondensatoren kan oppnå og $V_0$ er startspenningen til kondensatoren. $\tau$ her vil være kondensatorstyrken ganget med totalresistansen sett fra kondensatoren, $\tau = R_{eq}\cdot C$. Basert på om det er en kilde i kretsen eller ikke, har vi en ladnings- og utladingsfase for kondensatoren. Vi kan generalisere formlene i tilfellene opplading og utlading. I oppladingsfasen har vi initialbetingelsene; endelig spenning er like spenningskilde, startspenning er lik null og starttid er lik null:
+
 \[
-\begin{aligned}
-    V_{F} &= V_{kilde} \\
-    V_{0} &= 0 \\
-    t_0 &= 0 \\
-    v_{C\uparrow}(t) &= V_{F} + (0 - V_{F})\cdot e^{-(t - 0)/\tau} \\
-    v_{C\uparrow}(t) &= V_{F} (1 -  e^{-t/\tau})
-\end{aligned}
-\] 
+v_{C\uparrow}(t) = V_{F} (1 -  e^{-t/\tau})
+\]
+
 \noindent
-I utladingsfasen har vi andre initialbetingelser og vi kan utlede en formel for $v_C(t)$ i denne fasen. Her vil $t_0$ være tiden brukt i oppladingsfasen:
+I utladingsfasen har vi andre initialbetingelser og vi kan utlede en formel for $v_C(t)$ i denne fasen. Her vil $t_0$ være tiden brukt i oppladingsfasen, startspenning være spenningen oppnådd i oppladingsfasen og endelig spenning vil være lik null.
+
 \[
-\begin{aligned}
-    V_{F} &= 0 \\
-    V_{0} &= v_{C\uparrow}(t_0) \\
-    t_0 &= t_0 \\
-    v_{C\downarrow}(t) &= 0 + (v_{C\uparrow}(t_0) - 0)\cdot e^{-(t - t_0)/\tau} \\
-    v_{C\downarrow}(t) &= v_{C\uparrow}(t_0)\cdot e^{-(t - t_0)/\tau}
-\end{aligned}
-\] 
+v_{C\downarrow}(t) = v_{C\uparrow}(t_0)\cdot e^{-(t - t_0)/\tau}
+\]
 
 \subsection{RC - krets 1}
-\begin{figure}[H]\label{fig:Krets}
+\begin{figure}[H]
 \centering
 \begin{circuitikz}[american voltages]
 
@@ -61,10 +54,10 @@ I utladingsfasen har vi andre initialbetingelser og vi kan utlede en formel for 
     \draw (G) node[ground] {};
 
     %--- Batteri B1 ----------------------------------------------
-    \draw (T1) to[battery1, l_=$B_1$, a^=$10\,\text{V}$] (G);
+    \draw (T1) to[battery1, l_=$B_1$, a^=$10\text{V}$] (G);
 
     %--- R1 fra batteri til A ------------------------------------
-    \draw (T1) to[R, l_=$R_1$, a^=$12\,\text{k}\Omega$] (A);
+    \draw (T1) to[R, l_=$R_1$, a^=$12\text{k}\Omega$] (A);
 
     %--- Åpen bryter mellom A og B -------------------------------
     % "switch" gir en mekanisk brytersymbol
@@ -72,20 +65,21 @@ I utladingsfasen har vi andre initialbetingelser og vi kan utlede en formel for 
 
     %--- R2 på høyre side ----------------------------------------
     \draw (B) -- (T2)
-          to[R, l_=$R_2$, a^=$27\,\text{k}\Omega$] (BR);
+          to[R, l_=$R_2$, a^=$27\text{k}\Omega$] (BR);
 
     %--- Nedre returledning --------------------------------------
     \draw (BR) -- (F) -- (G);
 
     %--- Kondensator C1 mellom E og F ----------------------------
-    \draw (F) to[C, l_=$C_1$, a^=$68\,\mu\text{F}$] (E);
+    \draw (F) to[C, l_=$C_1$, a^=$68\text{\textmu F}$] (E);
 
 \end{circuitikz}
 \caption{Krets for beregning av opp- og utladningsfase for én eller flere kondensatorer.}
+\label{fig:Krets}
 \end{figure}
 
 
-
+\noindent
 Vi skal studere kretsen i to tidsintervaller hvor bryteren i node $D$ er tilkoblet node $A$ eller $B$. Når bryteren er tilkoblet node $A$ vil kondensatoren lades gjennom batteriet $B_1$. Når bryteren er tilkoblet $B$ vil kondensatoren utlade gjennom motstand $R_2$. Ladingsfasen er i tiden $0 \le t \le 10\text{s}$, og utladingsfasen i tiden $10\text{s} \le t \le 20\text{s}$. Dette skal vi gjøre i tilfellene; én kondensator, to kondensatorer i serie, og to kondensatorer i parallell.
 
 
@@ -94,7 +88,7 @@ I dette tilfellet skal $D$ til $E$ kortsluttes. Kretsen i figuren under viser de
 
 \begin{figure}[H]
 \centering
-\begin{circuitikz}[american voltages]\label{fig:en_kond_figur}
+\begin{circuitikz}[american voltages]
 
     %--- Noder (svarte prikker) ---------------------------------
     % Bunn/venstre (til jord)
@@ -128,10 +122,10 @@ I dette tilfellet skal $D$ til $E$ kortsluttes. Kretsen i figuren under viser de
     \draw (D) to[short, -] (E);
 
     %--- Batteri B1 ----------------------------------------------
-    \draw (T1) to[battery1, l_=$B_1$, a^=$10\,\text{V}$] (G);
+    \draw (T1) to[battery1, l_=$B_1$, a^=$10\text{V}$] (G);
 
     %--- R1 fra batteri til A ------------------------------------
-    \draw (T1) to[R, l_=$R_1$, a^=$12\,\text{k}\Omega$] (A);
+    \draw (T1) to[R, l_=$R_1$, a^=$12\text{k}\Omega$] (A);
 
     %--- Åpen bryter mellom A og B -------------------------------
     % "switch" gir en mekanisk brytersymbol
@@ -139,16 +133,16 @@ I dette tilfellet skal $D$ til $E$ kortsluttes. Kretsen i figuren under viser de
 
     %--- R2 på høyre side ----------------------------------------
     \draw (B) -- (T2)
-          to[R, l_=$R_2$, a^=$27\,\text{k}\Omega$] (BR);
+          to[R, l_=$R_2$, a^=$27\text{k}\Omega$] (BR);
 
     %--- Nedre returledning --------------------------------------
     \draw (BR) -- (F) -- (G);
 
     %--- Kondensator C1 mellom E og F ----------------------------
-    \draw (F) to[C, l_=$C_1$, a^=$68\,\mu\text{F}$] (E);
+    \draw (F) to[C, l_=$C_1$, a^=$68\text{\textmu F}$] (E);
 
 \end{circuitikz}
-\caption{RC krets med én kondensator}
+\caption{RC krets med én kondensator}\label{fig:en_kond_figur}
 \end{figure}
 
 
@@ -177,16 +171,16 @@ Siden vi her har en kortslutting fra node $D$ til $A$ kan vi forenkle kretsen.
     \draw (G) node[ground] {};
 
     %--- Batteri B1 ----------------------------------------------
-    \draw (T1) to[battery1, l_=$B_1$, a^=$10\,\text{V}$] (G);
+    \draw (T1) to[battery1, l_=$B_1$, a^=$10\text{V}$] (G);
 
     %--- R1 fra batteri til A ------------------------------------
-    \draw (T1) to[R, l_=$R_1$, a^=$12\,\text{k}\Omega$] (D);
+    \draw (T1) to[R, l_=$R_1$, a^=$12\text{k}\Omega$] (D);
 
     %--- Nedre returledning --------------------------------------
     \draw (F) -- (G);
 
     %--- Kondensator C1 mellom E og F ----------------------------
-    \draw (F) to[C, l_=$C_1$, a^=$68\,\mu\text{F}$] (D);
+    \draw (F) to[C, l_=$C_1$, a^=$68\text{\textmu F}$] (D);
 
 \end{circuitikz}
 \caption{Krets for oppladingsfase for én kondensator.}
@@ -194,27 +188,24 @@ Siden vi her har en kortslutting fra node $D$ til $A$ kan vi forenkle kretsen.
 
 \noindent
 Her lades kapasitatoren av $B_1$ gjennom $R_1$ og vi kan sette opp uttrykket for spenningen i $C_1$.
-\[
-\begin{aligned}
+
+\begin{align*}
     V_C(t) &= V_F (1 -  e^ {-t/\tau}) \\
     V_F &= B_1 = 10\text{V} \\
     \tau &= R_1C \\
-    \tau &= 12 \cdot 10^3 \Omega \cdot 68 \cdot 10^{-6}\text{F} \\
+    \tau &= 12\text{k}\Omega \cdot 68\text{\textmu F} \\
     \tau &= 0.816\text{s}  
-\end{aligned}
-\]
+\end{align*}
+
+
 \noindent
-Vi løser for $V_C(10)$ for å vite hvor mye spenning som kondensatoren har ved starten av utladingsfasen.
+Nå kan vi utlede et uttrykk for oppladingsfasen og vi løser for $V_C(10)$ for å vite hvor mye spenning som kondensatoren har lagret ved starten av utladingsfasen.
+
 \begin{align}
     V_C(t) &= 10 \left(1 -  e^{-t/0.816}\right) \label{eq:oppgaveAFør10} \\
     V_C(10) &= 10 \left(1 -  e^{-12.25}\right) \nonumber \\
-    V_C(10) &\approx 10 \nonumber
+    V_C(10) &\approx 10\text{V} \nonumber
 \end{align}
-
-
-
-
-
 
 
 
@@ -244,7 +235,7 @@ Vi løser for $V_C(10)$ for å vite hvor mye spenning som kondensatoren har ved 
 
     %--- R2 på høyre side ----------------------------------------
     \draw (D) -- (T2)
-          to[R, l_=$R_2$, a^=$27\,\text{k}\Omega$] (BR);
+          to[R, l_=$R_2$, a^=$27\text{k}\Omega$] (BR);
 
     %--- Nedre returledning --------------------------------------
     \draw (BR) -- (F);
@@ -258,13 +249,14 @@ Vi løser for $V_C(10)$ for å vite hvor mye spenning som kondensatoren har ved 
 
 \noindent
 Her starter kondensatoren sin utlading gjennom motstand $R_2$. $V_{0}$ vil være lik $V_C(10)$ fra funksjonen i første tilfelle.
+
 \[
 \begin{aligned}
     V_C(t)&=V_{0}  e^  {-(t-10)/\tau} \\
     V_{0} &= 10V \\
     \tau &= R_2C \\
-    \tau &= 27\text{k}\Omega \cdot 68 \cdot 10^{-6} \\
-    \tau &= 1.836
+    \tau &= 27\text{k}\Omega \cdot 68\text{\textmu F} \\
+    \tau &= 1.836s
 \end{aligned}
 \]
 \begin{equation}
@@ -274,6 +266,9 @@ Her starter kondensatoren sin utlading gjennom motstand $R_2$. $V_{0}$ vil være
 
 \paragraph{Endelig løsning. }
 Nå har vi to uttrykk for før og etter bryterskiftet. Denne funksjonen beskriver spenning over $DF$ på kretsen i figur~\ref{fig:en_kond_figur} i tidsintervallet $0 \le t \le 20\text{s}$. Dette er da ligning~\ref{eq:oppgaveAFør10} og ligning~\ref{eq:oppgaveAEtter10} med sine respektive tider:
+
+\vspace{1em}
+
 \begin{equation}
 V_C(t) =
 \begin{cases}
@@ -318,10 +313,10 @@ Kretsen figur~\ref{fig:Krets} har en ny kondensator $C_2$ mellom node $E$ og $D$
     \draw (G) node[ground] {};
 
     %--- Batteri B1 ----------------------------------------------
-    \draw (T1) to[battery1, l_=$B_1$, a^=$10\,\text{V}$] (G);
+    \draw (T1) to[battery1, l_=$B_1$, a^=$10\text{V}$] (G);
 
     %--- R1 fra batteri til A ------------------------------------
-    \draw (T1) to[R, l_=$R_1$, a^=$12\,\text{k}\Omega$] (A);
+    \draw (T1) to[R, l_=$R_1$, a^=$12\text{k}\Omega$] (A);
 
     %--- Åpen bryter mellom A og B -------------------------------
     % "switch" gir en mekanisk brytersymbol
@@ -329,16 +324,16 @@ Kretsen figur~\ref{fig:Krets} har en ny kondensator $C_2$ mellom node $E$ og $D$
 
     %--- R2 på høyre side ----------------------------------------
     \draw (B) -- (T2)
-          to[R, l_=$R_2$, a^=$27\,\text{k}\Omega$] (BR);
+          to[R, l_=$R_2$, a^=$27\text{k}\Omega$] (BR);
 
     %--- Nedre returledning --------------------------------------
     \draw (BR) -- (F) -- (G);
 
     %--- Kondensator C1 mellom E og F ----------------------------
-    \draw (F) to[C, l_=$C_1$, a^=$68\,\mu\text{F}$] (E);
+    \draw (F) to[C, l_=$C_1$, a^=$68\text{\textmu F}$] (E);
 
     %--- Kondensator C1 mellom D og E ----------------------------
-    \draw (E) to[C, l_=$C_2$, a^=$68\,\mu\text{F}$] (D);
+    \draw (E) to[C, l_=$C_2$, a^=$68\text{\textmu F}$] (D);
 
 \end{circuitikz}
 \caption{RC krets med to kondensatorer i seriekobling. }
@@ -346,30 +341,41 @@ Kretsen figur~\ref{fig:Krets} har en ny kondensator $C_2$ mellom node $E$ og $D$
 
 \noindent
 I denne kretsen kan vi beskrive de ulike spenningene over $DF$. Det vil være én spenning over $C_1$, én over $C_2$ og vi kan også beskrive spenningen over hele $DF$. Siden disse er i seriekobling, strømmen vil være like over $DF$. Både $C_1$ og $C_2$ har samme strøm gjennom slik at kapasitansen i dem må være like som utledet under.
+
 \[
 \begin{aligned}
     i_{EF} &= C_1\frac{dv_{C1}}{dt} \\
     i_{DE} &= C_2\frac{dv_{C2}}{dt} \\
-    i_{EF} = i_{DE} \quad &\text{og} \quad C_1 = C_2 \\
+    i_{EF} &= i_{DE} \\ 
+    C_1 &= C_2 \\
     \frac{dv_{C1}}{dt} &= \frac{dv_{C2}}{dt}
 \end{aligned}
 \]
+
+\vspace{1em}
 \noindent
-Kan vi konkludere med at spenningene må være like.
+Dermed kan vi konkludere med at spenningene må være like.
+
 \[
 v_{C1}(t) = v_{C2}(t), \qquad \text{for alle $t$}
 \]
+
 \noindent
 Og vi har uttryk for alle spenningene på skinnen $DF$:
+
 \[
 \begin{aligned}
-    v_{C1}(t) &= v_{C2}(t) = v_{C}(t) \\
+    \phantom{= v_{C}(t)} v_{C1}(t) &= v_{C2}(t) = v_{C}(t) \\
     V_{DF}(t) &= v_{C1}(t) + v_{C2}(t) \\
     V_{DF}(t) &= 2v_{C}(t)
 \end{aligned}
 \]
+
+\vspace{1em}
 \noindent
-Nå skal vi analysere kretsen i lade- og utladingsprosessen. For å kunne bruke spenning i kondensatorformlen må vi behandle $C_1$ og $C_2$ som én totalkapasitator. Da må vi finne totalkapasitansen sett fra $DF$. $C_{tot}$ blir: $\left(C_{tot}\right)^{-1} = \left(C_1\right)^{-1} + \left(C_2\right)^{-1} \rightarrow C_{tot} = 34 \mu\text{F}$. 
+Nå skal vi analysere kretsen i lade- og utladingsprosessen. For å kunne bruke spenning i kondensatorformlen må vi behandle $C_1$ og $C_2$ som én totalkapasitator. Da må vi finne totalkapasitansen sett fra $DF$. $C_{tot}$ blir: $\left(C_{tot}\right)^{-1} = \left(C_1\right)^{-1} + \left(C_2\right)^{-1} \rightarrow C_{tot} = 34 \text{\textmu F}$.
+
+\clearpage
 
 \paragraph{Ladingsprosess $0 \le t \le 10\text{s}$. } Her har vi en kortslutting fra $D$ til $A$.
 
@@ -398,19 +404,19 @@ Nå skal vi analysere kretsen i lade- og utladingsprosessen. For å kunne bruke 
     \draw (G) node[ground] {};
 
     %--- Batteri B1 ----------------------------------------------
-    \draw (T1) to[battery1, l_=$B_1$, a^=$10\,\text{V}$] (G);
+    \draw (T1) to[battery1, l_=$B_1$, a^=$10\text{V}$] (G);
 
     %--- R1 fra batteri til A ------------------------------------
-    \draw (T1) to[R, l_=$R_1$, a^=$12\,\text{k}\Omega$] (D);
+    \draw (T1) to[R, l_=$R_1$, a^=$12\text{k}\Omega$] (D);
 
     %--- Nedre returledning --------------------------------------
     \draw (F) -- (G);
 
     %--- Kondensator C1 mellom E og F ----------------------------
-    \draw (F) to[C, l_=$C_1$, a^=$68\,\mu\text{F}$] (E);
+    \draw (F) to[C, l_=$C_1$, a^=$68\text{\textmu F}$] (E);
 
     %--- Kondensator C1 mellom E og D ----------------------------
-    \draw (E) to[C, l_=$C_2$, a^=$68\,\mu\text{F}$] (D);
+    \draw (E) to[C, l_=$C_2$, a^=$68\text{\textmu F}$] (D);
 
 \end{circuitikz}
 \caption{Krets for oppladingsfase for to kondensatorer i seriekobling. }
@@ -418,20 +424,19 @@ Nå skal vi analysere kretsen i lade- og utladingsprosessen. For å kunne bruke 
 
 \noindent
 Vi finner \emph{tau} og uttrykket for $V_{DF}(t)$ fra sekund $0$ til $10$:
+
 \[
 \begin{aligned}
     \tau &= R_1 C_{tot} \\
-    \tau &= 12\text{k}\Omega \cdot 34 \cdot 10^{-6} \\
+    \tau &= 12\text{k}\Omega \cdot 34\text{\textmu F} \\
     \tau &= 0.408\text{s} \\
     V_{DF}(t) &= V_B (1 -  e^ {-t/\tau}) \\
     V_{DF}(t) &= 10 (1 -  e^ {-t/0.408}) \\
-    V_{DF}(10) &\approx 10\text{V}
+    \phantom{e^ {-t/0.408}}V_{DF}(10) &\approx 10\text{V}
 \end{aligned}
 \]
+
 Her vil uttrykket for spenningen i den enkelte kondensatoren være $v_{Cn}(t) = \frac{1}{2}V_{DF}(t)$.
-
-
-
 
 
 
@@ -462,7 +467,7 @@ Her vil uttrykket for spenningen i den enkelte kondensatoren være $v_{Cn}(t) = 
 
     %--- R2 på høyre side ----------------------------------------
     \draw (D) -- (T2)
-          to[R, l_=$R_2$, a^=$27\,\text{k}\Omega$] (BR);
+          to[R, l_=$R_2$, a^=$27\text{k}\Omega$] (BR);
 
     %--- Nedre returledning --------------------------------------
     \draw (BR) -- (F);
@@ -482,13 +487,14 @@ Her vil uttrykket for spenningen i den enkelte kondensatoren være $v_{Cn}(t) = 
 \[
 \begin{aligned}
     \tau &= R_2 C_{tot} \\
-    \tau &= 27\text{k}\Omega \cdot 34 \cdot 10^{-6} \\
+    \tau &= 27\text{k}\Omega \cdot 34\text{\textmu F} \\
     \tau &= 0.918\text{s} \\
     V_{DF}(t) &= 10  e^ {-(t - 10)/0.918}
 \end{aligned}
 \]
 
-\paragraph{Endelig uttrykk. }
+\paragraph{Endelig uttrykk. } Med bakgrunn på uttrykkene i oppladings- og utladingsfasen kan vi uttrykke to uttryk for hele perioden. Et uttrykk som beskriver totalspenningen over området $DF$ og et uttrykk for hver enkelt kondensator.
+
 \[
 \begin{aligned}
     V_{DF}(t) &= 
@@ -553,10 +559,10 @@ Her skal vi kortslutte $DE$ og parallelkoble $C_2$ med $C_1$ mellom $FE$. Kretse
     \draw (D) to[short, -] (E);
 
     %--- Batteri B1 ----------------------------------------------
-    \draw (T1) to[battery1, l_=$B_1$, a^=$10\,\text{V}$] (G);
+    \draw (T1) to[battery1, l_=$B_1$, a^=$10\text{V}$] (G);
 
     %--- R1 fra batteri til A ------------------------------------
-    \draw (T1) to[R, l_=$R_1$, a^=$12\,\text{k}\Omega$] (A);
+    \draw (T1) to[R, l_=$R_1$, a^=$12\text{k}\Omega$] (A);
 
     %--- Åpen bryter mellom A og B -------------------------------
     % "switch" gir en mekanisk brytersymbol
@@ -564,7 +570,7 @@ Her skal vi kortslutte $DE$ og parallelkoble $C_2$ med $C_1$ mellom $FE$. Kretse
 
     %--- R2 på høyre side ----------------------------------------
     \draw (B) -- (T2)
-          to[R, l_=$R_2$, a^=$27\,\text{k}\Omega$] (BR);
+          to[R, l_=$R_2$, a^=$27\text{k}\Omega$] (BR);
 
     %--- Nedre returledning --------------------------------------
     \draw (BR) -- (F) -- (G);
@@ -572,19 +578,23 @@ Her skal vi kortslutte $DE$ og parallelkoble $C_2$ med $C_1$ mellom $FE$. Kretse
     \draw (EL) -- (E) -- (ER);
 
     %--- Kondensator C1 mellom E og F ----------------------------
-    \draw (FL) to[C, l_=$C_1$, a^=$68\,\mu\text{F}$] (EL);
-    \draw (FR) to[C, l_=$C_2$, a^=$68\,\mu\text{F}$] (ER);
+    \draw (FL) to[C, l_=$C_1$, a^=$68\text{\textmu F}$] (EL);
+    \draw (FR) to[C, l_=$C_2$, a^=$68\text{\textmu F}$] (ER);
 
 \end{circuitikz}
 \caption{RC krets med to kondensatorer i parallellkobling. }
 \end{figure}
 
 \noindent
-Her vil spenningen over $DF$ være representert av to kondensatorer i parallell. Nå kan $C_{tot}$ regnes ut som
+Her vil spenningen over $DF$ være representert av to kondensatorer i parallell. Nå kan $C_{tot}$ regnes ut som:
+
 \[
-C_{tot} = C_1 + C_2 \;\;\Rightarrow\;\; C_{tot} = 136\,\mu\text{F}.
+C_{tot} = C_1 + C_2 \;\;\Rightarrow\;\; C_{tot} = 136\text{\textmu F}.
 \]
+
+\noindent
 Over identiske komponenter vil strømmen fordeles, men spenningen over begge kondensatorene vil være den samme siden de er parallellkoblet.
+
 \[
 v_{C1}(t) = v_{C2}(t) = V_{DF}(t).
 \]
@@ -622,10 +632,10 @@ v_{C1}(t) = v_{C2}(t) = V_{DF}(t).
     \draw (D) to[short, -] (E);
 
     %--- Batteri B1 ----------------------------------------------
-    \draw (T1) to[battery1, l_=$B_1$, a^=$10\,\text{V}$] (G);
+    \draw (T1) to[battery1, l_=$B_1$, a^=$10\text{V}$] (G);
 
     %--- R1 fra batteri til A ------------------------------------
-    \draw (T1) to[R, l_=$R_1$, a^=$12\,\text{k}\Omega$] (D);
+    \draw (T1) to[R, l_=$R_1$, a^=$12\text{k}\Omega$] (D);
 
     %--- Nedre returledning --------------------------------------
     \draw (G) -- (FR);
@@ -633,34 +643,35 @@ v_{C1}(t) = v_{C2}(t) = V_{DF}(t).
     \draw (EL) -- (E) -- (ER);
 
     %--- Kondensator C1 mellom E og F ----------------------------
-    \draw (FL) to[C, l_=$C_1$, a^=$68\,\mu\text{F}$] (EL);
-    \draw (FR) to[C, l_=$C_2$, a^=$68\,\mu\text{F}$] (ER);
+    \draw (FL) to[C, l_=$C_1$, a^=$68\text{\textmu F}$] (EL);
+    \draw (FR) to[C, l_=$C_2$, a^=$68\text{\textmu F}$] (ER);
 
 \end{circuitikz}
 \caption{Krets for oppladingsfasen for to kondensatorer i parallellkobling. }
 \end{figure}
 
 \noindent
-Her ser vi en spenningskilde $B_1$ som lader opp en ekvivalent kapasitans $C_{tot}$ via motstanden $R_1$. Tidskonstanten og spenningen over $DF$ i ladeperioden blir
+Her ser vi en spenningskilde $B_1$ som lader opp en ekvivalent kapasitans $C_{tot}$ via motstanden $R_1$. Tidskonstanten og spenningen over $DF$ i ladeperioden blir:
+
 \[
 \begin{aligned}
     \tau &= R_1 C_{tot} \\
-    \tau &= 12\text{k}\Omega \cdot 136 \cdot 10^{-6} \\
-    \tau &= 1.632\,\text{s} \\
+    \tau &= 12\text{k}\Omega \cdot 136\text{\textmu F} \\
+    \tau &= 1.632\text{s} \\
     V_{DF}(t) &= V_B\bigl(1 -  e^{(-t/\tau)}\bigr) \\
     V_{DF}(t) &= 10\bigl(1 -  e^{(-t/1.632)}\bigr)
 \end{aligned}
 \]
-Siden kondensatorene er parallellkoblet, har vi
+
+\noindent
+Siden kondensatorene er parallellkoblet, har vi:
+
 \[
 v_{C1}(t) = v_{C2}(t) = V_{DF}(t)
 \]
 
 \noindent
-Når $t = 10\,\text{s}$ er det gått flere tidskonstanter, og vi kan ta
-\[
-V_{DF}(10) \approx 10\,\text{V}.
-\]
+Når $t = 10\text{s}$ er det gått flere tidskonstanter, og vi kan ta $V_{DF}(10) \approx 10\text{V}$.
 
 
 
@@ -703,7 +714,7 @@ V_{DF}(10) \approx 10\,\text{V}.
 
     %--- R2 på høyre side ----------------------------------------
     \draw (D) -- (T2)
-          to[R, l_=$R_2$, a^=$27\,\text{k}\Omega$] (BR);
+          to[R, l_=$R_2$, a^=$27\text{k}\Omega$] (BR);
 
     %--- Nedre returledning --------------------------------------
     \draw (FL) -- (BR);
@@ -721,22 +732,27 @@ V_{DF}(10) \approx 10\,\text{V}.
 
 \noindent
 Når bryteren umiddelbart etterpå kobles til node $B$, vil de to parallellkoblede kondensatorene utlades gjennom motstanden $R_2$ på samme måte som én kapasitans $C_{tot}$.
+
 \[
 \begin{aligned}
     \tau &= R_2 C_{tot} \\
-    \tau &= 27\text{k}\Omega \cdot 136 \cdot 10^{-6} \\
-    \tau &= 3.672\,\text{s}
-    V_{DF}(t) &= V_{DF}(10)\, e^{-(t-10)/\tau} \\
-    V_{DF}(t) &\approx 10\, e^{-(t-10)/3.672}
+    \tau &= 27\text{k}\Omega \cdot 136\text{\textmu F} \\
+    \tau &= 3.672\text{s} \\
+    V_{DF}(t) &= V_{DF}(10) e^{-(t-10)/\tau} \\
+    V_{DF}(t) &\approx 10 e^{-(t-10)/3.672}
 \end{aligned}
 \]
+
+\noindent
 Igjen er spenningen over hver av kondensatorene lik spenningen over $DF$:
+
 \[
 v_{C1}(t) = v_{C2}(t) = V_{DF}(t)
 \]
 
 \paragraph{Endelig uttrykk. }
 Vi kan nå samle resultatene for hele tidsintervallet:
+
 \[
 V_{DF}(t) =
 \begin{cases}
@@ -744,7 +760,7 @@ V_{DF}(t) =
 10 e^{-(t-10)/3.672}, & 10\text{s} \le t \le 20\text{s},
 \end{cases}
 \]
-og spenningen over hver av kondensatorene er
+
 \[
 v_{C1}(t) = v_{C2}(t) = V_{DF}(t).
 \]
@@ -755,16 +771,16 @@ v_{C1}(t) = v_{C2}(t) = V_{DF}(t).
 
 
 \subsubsection{Grafen av $V_{DF}(t)$}
-Vi har tre tilfeller. Tilfelle 1-3 for kondensatorer er; én alene, to i seriekobling og to i parallellkobling. Grafing er under.
+Vi har tre tilfeller. Tilfelle 1-3 for kondensatorer er; én alene, to i seriekobling og to i parallellkobling. Grafen er vist under.
 
 \begin{figure}[H]
 \centering
-\begin{tikzpicture}
+\begin{tikzpicture}\label{fig:teoretisk_tilfellene_1til3}
 \begin{axis}[
     width=0.9\textwidth,
     height=7cm,
-    xlabel={$t\,[\mathrm{s}]$},
-    ylabel={$V_{DF}(t)\,[\mathrm{V}]$},
+    xlabel={$t[\mathrm{s}]$},
+    ylabel={$V_{DF}(t)[\mathrm{V}]$},
     xmin=0, xmax=20,
     ymin=0, ymax=10.5,
     grid=both,
@@ -840,7 +856,7 @@ Vi har tre tilfeller. Tilfelle 1-3 for kondensatorer er; én alene, to i serieko
 
 \end{axis}
 \end{tikzpicture}
-\caption{Spenning $V_{DF}(t)$ for tilfelle 1--3 i tidsrommet $0 \le t \le 20\,\mathrm{s}$.}
+\caption{Spenning $V_{DF}(t)$ for tilfelle 1--3 i tidsrommet $0 \le t \le 20\mathrm{s}$.}
 \end{figure}
 
 
@@ -850,14 +866,14 @@ Vi har tre tilfeller. Tilfelle 1-3 for kondensatorer er; én alene, to i serieko
 
 \subsection{RC - krets 2}\label{subsec:rc-krets-teori}
 
-\begin{figure}[H]\label{fig:grafet_v_av_t}
+\begin{figure}[H]
 \centering
 \begin{tikzpicture}
 \begin{axis}[
     width=0.8\textwidth,
     height=6cm,
-    xlabel={$t\,[\mathrm{ms}]$},
-    ylabel={$v(t)\,[\mathrm{V}]$},
+    xlabel={$t[\mathrm{ms}]$},
+    ylabel={$v(t)[\mathrm{V}]$},
     xmin=0, xmax=30,
     ymin=0, ymax=8.8,
     ytick={0,2,4,6,8},
@@ -877,12 +893,13 @@ Vi har tre tilfeller. Tilfelle 1-3 for kondensatorer er; én alene, to i serieko
         };
 \end{axis}
 \end{tikzpicture}
-\caption{Inngangssignal $v(t)$ med høy-nivå $8\,\mathrm{V}$ i 9\,ms per periode.}
+\caption{Inngangssignal $v(t)$ med høy-nivå $8\mathrm{V}$ i 9ms per periode.}
+\label{fig:grafet_v_av_t}
 \end{figure}
 
 
 
-\begin{figure}[H]\label{fig:krets-med-rc-ledd}
+\begin{figure}[H]
 \centering
 \begin{circuitikz}[american voltages]
 
@@ -907,7 +924,7 @@ Vi har tre tilfeller. Tilfelle 1-3 for kondensatorer er; én alene, to i serieko
     \draw (TL) to[R=$2.2\text{k}\Omega$] (T);
     \draw (T) to[R=$3.9\text{k}\Omega$] (TR);
     \draw (TR) to[R, l_=$3.3\text{k}\Omega$] (BR);
-    \draw (T) to[C, l_=$v_C(t)$, a^=$1\mu\text{F}$] (B);
+    \draw (T) to[C, l_=$v_C(t)$, a^=$1\text{\textmu F}$] (B);
     \draw (BL) -- (BR);
 
     \draw (10, 4) to[short, -] (VT);
@@ -917,12 +934,14 @@ Vi har tre tilfeller. Tilfelle 1-3 for kondensatorer er; én alene, to i serieko
 
 \end{circuitikz}
 \caption{Kretsen i tilfelle 1}
+\label{fig:krets-med-rc-ledd}
 \end{figure}
 
 
 
 \subsubsection{DutyCycle, frekvens og symmetrilinje}
 Ser vi på grafen i figur~\ref{fig:grafet_v_av_t} kan vi trekke ut DutyCycle, frekvens og symmetrilinje. Definisjonene deres er som følger:
+
 \[
 \begin{aligned}
     DutyCycle &= \frac{T_{topp}}{T_{periode}} \\
@@ -930,11 +949,16 @@ Ser vi på grafen i figur~\ref{fig:grafet_v_av_t} kan vi trekke ut DutyCycle, fr
     V_{symmetri} &= \frac{V_{min} + V_{maks}}{2}
 \end{aligned}
 \]
+
 \noindent
 Analyserer vi grafen ser vi at perioden er $20\text{ms}$ fordi kurven har samme tilstand, verdi og retning i enhver punkt på grafen med $20\text{ms}$ i avstand. Dette er da $T_{periode}$. Vi ser også at tiden grafen er på sin $V_{maks}$ er $9\text{ms}$. Dette er da $T_{topp}$. Grafens $V_{min}$ og $V_{maks}$ er henholdsvis $0\text{V}$ og $8\text{V}$. Da som vi har verdier løser vi for DutyCycle, frekvens og symmetrilinje under:
+
+\[
+    T_{periode} = 20\text{ms}, \quad T_{topp} = 9\text{ms}, \quad V_{min} = 0\text{V}, \quad V_{maks} = 8\text{V}
+\]
+
 \[
 \begin{aligned}
-    T_{periode} = 20\text{ms}, \quad T_{topp} = 9\text{ms}, & \quad V_{min} = 0\text{V}, \quad V_{maks} = 8\text{V} \\[1.2em]
     DutyCycle &= \frac{9\text{ms}}{20\text{ms}} = 0.45 = 45\% \\
     f &= \frac{1}{20\text{ms}} = 50 \text{Hz} \\
     V_{sym} &= \frac{0\text{V} + 8\text{V}}{2} = 4\text{V}
@@ -943,62 +967,70 @@ Analyserer vi grafen ser vi at perioden er $20\text{ms}$ fordi kurven har samme 
 
 \subsubsection{$v_C(t)$ og $v_0(t)$ i kretsen}
 $v_C(t)$ kan beskrives som spenningen ved node A. Maksimumspenning i node A kan løses for med spenningsdeling sett fra spenningskilden til node A. $R_{last}$ er totalmotstanden fra node A til jording og vi kan løse for teoretisk maksimumspenning i kondensatoren.
-\[
-\begin{aligned}
-    R_{last} &= \left(3.9 + 3.3\right){k}\Omega \\
-    R_{last} &= 7.2\text{k}\Omega
-\end{aligned}
-\]
 
 \[
 \begin{aligned}
-    V_{A,max} &= V_{C}^{max} = 8\text{V}\cdot\frac{R_{last}}{2.2\text{k}\Omega+R_{last}} \\
+    R_{last} &= \left(3.9 + 3.3\right){k}\Omega \\
+    R_{last} &= 7.2\text{k}\Omega \\
+    V_{A,max} = V_{C}^{max} &= 8\text{V}\cdot\frac{R_{last}}{2.2\text{k}\Omega+R_{last}} \\
     V_{A,max} &\approx 6.12\text{V}
 \end{aligned}
 \]
 
 \noindent
 Dette er den maksimale spenningen kondensatoren kan få hvis den får tilstrekkelig tid på å lade. Nå kan vi beregne tidskonstanten $\tau$. For dette kortslutter vi spenningskilden, dermed er det to grener til jord. $R_{eq}$ er totalmotstanden fra node A til jord.
+
 \[
 \begin{aligned}
-    R_{eq} &= 2.2\text{k}\Omega || (3.9+3.3)\text{k}\Omega \\
+    \phantom{123456789123} R_{eq} &= 2.2\text{k}\Omega || (3.9+3.3)\text{k}\Omega \\
     R_{eq} &= \frac{2.2\cdot7.2}{2.2+7.2}\text{k}\Omega \\
     R_{eq} &\approx 1.69\text{k}\Omega \\
-    \tau &= R_{eq}C \approx 1.69\text{k}\Omega \cdot 1 \text{$\mu$F} \\
+    \tau &= R_{eq}C \approx 1.69\text{k}\Omega \cdot 1 \text{\textmu F} \\
     \tau &\approx 1.69\text{ms}
 \end{aligned}
 \]
 
 \noindent
 Nå kan vi gi et uttrykk for $v_C(t)$. Først ser vi på ladefasen. Når inngangen hopper til $8\text{V}$ ved et tidspunkt $t_0$ og kondensatoren har verdi $v_C(t_0)$, får vi:
+
 \[
 v_C(t) = V_{A,max} + \left(v_C(t_0) - V_{A,max}\right) \cdot e ^{-\left(t-t_0\right)/\tau}
 \]
+
 \noindent
 Men, vi har initialbetingelsen $v_C(0) = 0$ og signalet er høyt fra $t \in [0, 9\text{ms}]$. Dermed:
+
 \[
 \begin{aligned}
     v_C(t) &= V_{A,max}\left(1 -  e^{-t/\tau}\right), \qquad 0 \le t \le 9\text{ms} \\
     v_C(t) &= 6.12\left(1 -  e^{-t\cdot10^3/1.69}\right), \qquad 0 \le t \le 9\text{ms}
 \end{aligned}
 \]
+
+\noindent
 Etter ladefasen har vi utladefasen, det vil være når $v(t)=0$. Når inngangsspenningen går til $0\text{V}$ ved $t=9\text{ms}$ vil spenningen over kondensatoren avta mot 0 med samme tidskonstant. Dette uttrykket gjelder i tidsrommet $t \in [9\text{ms}, 20\text{s}]$.
+
 \[
 \begin{aligned}
     v_C(t)&=v_C(9\text{ms}) \cdot e^ {-(t-9\text{ms})/\left(1.69\text{ms}\right)} \\
     v_C(9\text{ms})&=V_{A,max}\left(1- e^{\left(-9\text{ms}\right)/1.69\text{ms}}\right) \\
-    v_C(9\text{ms})&=6.07 \\
-    v_C(t) &=6.07 e^{-(t-9\text{ms})/\left(1.69\text{ms}\right)}
+    v_C(9\text{ms})&=6.07\text{V} \\
+    v_C(t) &=6.07 \cdot e^{-(t-9\text{ms})/\left(1.69\text{ms}\right)}
 \end{aligned}
 \]
+
+\vspace{1em}
 \noindent
 Nå kan vi se på et uttrykk for $v_0(t)$. Noden $v_0(t)$ ligger over motstanden $3.3\text{k}\Omega$. Dette danner en spenningsdeler sammen med $3.9\text{k}\Omega$. Vi kan bruke ligningen for spenningsdeling og regne ut $v_0(t)$.
+
 \[
 \begin{aligned}
     v_0(t)&=\frac{3.3\text{k}\Omega}{3.9\text{k}\Omega+3.3\text{k}\Omega}v_C(t) \\
-    v_0(t)&\approx0.458v_C(t)
+    v_0(t)&\approx0.458\cdot v_C(t)
 \end{aligned}
 \]
+
+
 \paragraph{Endelig løsning for funksjonene. } Nå som vi har uttrykt begge funksjonene i en periode. Kan vi presentere dem slik:
 
 \[
@@ -1022,13 +1054,13 @@ v_0(t) &=
 \]
 
 
-\begin{figure}[H]\label{fig:teor_vC_ogv0}
+\begin{figure}[H]
 \centering
 \begin{tikzpicture}
 \begin{axis}[
     width=0.9\textwidth,
-    height=7cm,
-    xlabel={$t\,[\mathrm{ms}]$},
+    height=5cm,
+    xlabel={$t[\mathrm{ms}]$},
     ylabel={Spenning\ [V]},
     xmin=0, xmax=40,
     ymin=0, ymax=7,
@@ -1074,11 +1106,13 @@ v_0(t) &=
 \end{axis}
 \end{tikzpicture}
 \caption{Spenningene $v_C(t)$ og $v_0(t)$ over to perioder av inngangssignalet.}
+\label{fig:teor_vC_ogv0}
 \end{figure}
 
 
-\subsubsection{Oppladningstida og nedladingstida for $C$}
+\subsubsection{Oppladningstida og utladingstida for $C$}
 Kondensatoren trenger mye tid for å lades helt opp eller lades helt ut, derfor er en god regel at 99.3\% av teoretisk maksverdi er regnet som fulloppladet og 0.7\% er utladet. Dette skjer etter omtrent \emph{5 tidskonstanter} begge veier.
+
 \[
 \begin{aligned}
     t &\approx 5\tau = 5 \cdot 1.69\text{ms}\\
